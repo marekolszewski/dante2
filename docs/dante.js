@@ -116,7 +116,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 426:
+/***/ 425:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -328,7 +328,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 427:
+/***/ 426:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -443,7 +443,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 428:
+/***/ 427:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -452,7 +452,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(428);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -636,7 +636,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 431:
+/***/ 430:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -665,7 +665,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 432:
+/***/ 431:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -674,7 +674,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(428);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -686,7 +686,7 @@ webpackJsonp([1],{
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(432);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -853,7 +853,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 458:
+/***/ 457:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -862,7 +862,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(428);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -997,7 +997,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 459:
+/***/ 458:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1036,9 +1036,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(459);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1259,7 +1259,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 460:
+/***/ 459:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1323,7 +1323,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 461:
+/***/ 460:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1360,7 +1360,7 @@ webpackJsonp([1],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1486,7 +1486,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 462:
+/***/ 461:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1525,9 +1525,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(459);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1884,7 +1884,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 463:
+/***/ 462:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1923,9 +1923,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(459);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -2392,7 +2392,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 464:
+/***/ 463:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2401,7 +2401,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(464);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -2435,11 +2435,11 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(432);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -2722,6 +2722,31 @@ webpackJsonp([1],{
 	    value: function uploadFile() {
 	      var _this3 = this;
 
+	      if (this.config.upload_handler) {
+	        this.config.upload_handler(this.formatData().get('file'), this.updateProgressBar).then(function (url) {
+	          _this3.uploadCompleted({ url: url });
+	          _this3.props.blockProps.removeLock();
+	          _this3.stopLoader();
+	          _this3.file = null;
+
+	          if (_this3.config.upload_callback) {
+	            return _this3.config.upload_callback(result, _this3);
+	          }
+	        })['catch'](function (error) {
+	          _this3.props.blockProps.removeLock();
+	          _this3.stopLoader();
+
+	          console.log('ERROR: got error uploading file ' + error);
+	          if (_this3.config.upload_error_callback) {
+	            return _this3.config.upload_error_callback(error, _this3);
+	          }
+	        });
+
+	        return handleUp = function handleUp(json_response) {
+	          return _this3.uploadCompleted(json_response, n);
+	        };
+	      }
+
 	      var handleUp = void 0;
 	      (0, _axios2['default'])({
 	        method: 'post',
@@ -2877,7 +2902,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 469:
+/***/ 468:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2916,11 +2941,11 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(432);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -3074,7 +3099,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 470:
+/***/ 469:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3083,7 +3108,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(464);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -3117,9 +3142,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(425);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(432);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -3224,7 +3249,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 471:
+/***/ 470:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3233,7 +3258,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(464);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
