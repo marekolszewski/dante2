@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Entity, RichUtils, AtomicBlockUtils, EditorState } from 'draft-js'
+import { Entity, RichUtils, AtomicBlockUtils, EditorState, getVisibleSelectionRect } from 'draft-js'
 
 import { getSelectionRect, getSelection } from "../../utils/selection.js"
 
@@ -81,7 +81,25 @@ class DanteImagePopover extends React.Component {
     let { editorState } = this.props
 
     if (editorState.getSelection().isCollapsed()) {
+      const selection = editorState.getSelection()
+      const currentBlock = contentState.getBlockForKey(selection.getStartKey())
+      //const currentBlock = getCurrentBlock(editorState)
 
+      if (currentBlock.getType() === 'image') {
+        const selectionRect = getVisibleSelectionRect(window)
+        const parent = ReactDOM.findDOMNode(this.props.editor)
+        const parentBoundary = parent.getBoundingClientRect()
+        const el = this.refs.image_popover
+        const padd = el.offsetWidth / 2
+        return this.setPosition({
+          top: selectionRect.top - parentBoundary.top,
+          left: selectionRect.left - parentBoundary.left + selectionRect.width / 2 - padd
+        })
+      } else {
+        return this.hide()
+      }
+
+      /*
       let currentBlock = getCurrentBlock(editorState)
       let blockType = currentBlock.getType()
 
@@ -115,6 +133,7 @@ class DanteImagePopover extends React.Component {
           left: selectionBoundary.left + selectionBoundary.width / 2 - padd
         })
       }
+      */
     } else {
       return this.hide()
     }
