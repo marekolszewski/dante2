@@ -82,6 +82,7 @@ class DanteImagePopover extends React.Component {
 
     if (editorState.getSelection().isCollapsed()) {
       const selection = editorState.getSelection()
+      const contentState = editorState.getCurrentContent()
       const currentBlock = contentState.getBlockForKey(selection.getStartKey())
       //const currentBlock = getCurrentBlock(editorState)
 
