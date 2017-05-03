@@ -27,7 +27,7 @@ class DanteImagePopover extends React.Component {
         top: 0,
         left: 0
       },
-      show: true,
+      show: false,
       scaled: false,
       buttons: [{ type: "left" }, 
                 { type: "center"}, 
@@ -50,8 +50,8 @@ class DanteImagePopover extends React.Component {
   }
 
   hide() {
-//   return this.setState({
-//     show: false })
+   return this.setState({
+     show: false })
   }
 
   setPosition(coords) {
@@ -129,8 +129,11 @@ class DanteImagePopover extends React.Component {
       this.display(blockType === "image")
 
       if (blockType === "image") {
-        selectionBoundary = node.anchorNode.parentNode.parentNode
-                                           .parentNode.getBoundingClientRect()
+        //selectionBoundary = node.anchorNode.parentNode.parentNode
+        //                                   .parentNode.getBoundingClientRect()
+
+        selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getBoundingClientRect()
+
         let el = this.refs.image_popover
         let padd = el.offsetWidth / 2
         return this.setPosition({
