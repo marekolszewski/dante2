@@ -1755,7 +1755,8 @@ webpackJsonp([1],{
 	        var parent = _reactDom2['default'].findDOMNode(this.props.editor);
 	        var parentBoundary = parent.getBoundingClientRect();
 
-	        console.log('parentBoundary', parentBoundary);
+	        console.log('parentBoundary.top', parentBoundary.top + window.scrollY);
+	        console.log('coords.top', coords.top + window.scrollY);
 
 	        // hide if selected node is not in editor
 	        // debugger
@@ -1769,8 +1770,8 @@ webpackJsonp([1],{
 	        // checkeamos si esta vacio
 	        this.display(block.getText().length === 0 && blockType === "unstyled");
 	        return this.setPosition({
-	          top: coords.top - parentBoundary.top + window.scrollY,
-	          left: coords.left - parentBoundary.left + window.scrollX - 60
+	          top: coords.top - parentBoundary.top,
+	          left: coords.left - parentBoundary.left - 60
 	        });
 
 	        /*
