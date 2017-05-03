@@ -49907,6 +49907,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (editorState.getSelection().isCollapsed()) {
 	      var selection = editorState.getSelection();
+	      var contentState = editorState.getCurrentContent();
 	      var currentBlock = contentState.getBlockForKey(selection.getStartKey());
 	      //const currentBlock = getCurrentBlock(editorState)
 
