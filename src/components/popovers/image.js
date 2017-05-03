@@ -80,12 +80,12 @@ class DanteImagePopover extends React.Component {
   relocate() {
     let { editorState } = this.props
 
+    /*
     if (editorState.getSelection().isCollapsed()) {
       const selection = editorState.getSelection()
       const contentState = editorState.getCurrentContent()
       const currentBlock = contentState.getBlockForKey(selection.getStartKey())
       //const currentBlock = getCurrentBlock(editorState)
-      //
       console.log('type', currentBlock.getType())
 
       if (currentBlock.getType() === 'image') {
@@ -103,8 +103,8 @@ class DanteImagePopover extends React.Component {
           left: imageBoundary.left - parentBoundary.left + imageBoundary.width / 2 - padd
         })
       } 
+      */
 
-      /*
       let currentBlock = getCurrentBlock(editorState)
       let blockType = currentBlock.getType()
 
@@ -138,7 +138,6 @@ class DanteImagePopover extends React.Component {
           left: selectionBoundary.left + selectionBoundary.width / 2 - padd
         })
       }
-      */
     } else {
       return this.hide()
     }
