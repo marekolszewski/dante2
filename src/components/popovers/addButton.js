@@ -227,7 +227,7 @@ class DanteInlineTooltip extends React.Component {
       // checkeamos si esta vacio
       this.display(block.getText().length === 0 && blockType === "unstyled")
       return this.setPosition({
-        top: coords.top - parentBoundary.top
+        top: coords.top - parentBoundary.top,
         left: coords.left - parentBoundary.left - 60
       })
 
