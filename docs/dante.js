@@ -1130,6 +1130,8 @@ webpackJsonp([1],{
 	        var contentState = editorState.getCurrentContent();
 	        var currentBlock = contentState.getBlockForKey(selection.getStartKey());
 	        //const currentBlock = getCurrentBlock(editorState)
+	        //
+	        console.log('type', currentBlock.getType());
 
 	        if (currentBlock.getType() === 'image') {
 	          var selectionRect = (0, _draftJs.getVisibleSelectionRect)(window);
