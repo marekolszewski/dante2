@@ -49914,14 +49914,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      console.log('type', currentBlock.getType());
 
 	      if (currentBlock.getType() === 'image') {
+	        var node = (0, _index.getNode)();
+	        var image = _reactDom2['default'].findDOMNode(node);
+	        var imageBoundary = image.getBoundingClientRect();
+
 	        var selectionRect = (0, _draftJs.getVisibleSelectionRect)(window);
 	        var parent = _reactDom2['default'].findDOMNode(this.props.editor);
 	        var parentBoundary = parent.getBoundingClientRect();
 	        var el = this.refs.image_popover;
 	        var padd = el.offsetWidth / 2;
 	        return this.setPosition({
-	          top: selectionRect.top - parentBoundary.top,
-	          left: selectionRect.left - parentBoundary.left + selectionRect.width / 2 - padd
+	          top: imageBoundary.top - parentBoundary.top,
+	          left: imageBoundary.left - parentBoundary.left + imageBoundary.width / 2 - padd
 	        });
 	      }
 
