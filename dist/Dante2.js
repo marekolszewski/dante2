@@ -49853,7 +49853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        top: 0,
 	        left: 0
 	      },
-	      show: false,
+	      show: true,
 	      scaled: false,
 	      buttons: [{ type: "left" }, { type: "center" }, { type: "fill" }, { type: "wide" }]
 	    };
@@ -49874,8 +49874,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  DanteImagePopover.prototype.hide = function hide() {
-	    return this.setState({
-	      show: false });
+	    //   return this.setState({
+	    //     show: false })
 	  };
 
 	  DanteImagePopover.prototype.setPosition = function setPosition(coords) {
@@ -49921,8 +49921,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	          top: selectionRect.top - parentBoundary.top,
 	          left: selectionRect.left - parentBoundary.left + selectionRect.width / 2 - padd
 	        });
-	      } else {
-	        return this.hide();
 	      }
 
 	      /*

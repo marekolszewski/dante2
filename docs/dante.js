@@ -1064,7 +1064,7 @@ webpackJsonp([1],{
 	        top: 0,
 	        left: 0
 	      },
-	      show: false,
+	      show: true,
 	      scaled: false,
 	      buttons: [{ type: "left" }, { type: "center" }, { type: "fill" }, { type: "wide" }]
 	    };
@@ -1089,8 +1089,8 @@ webpackJsonp([1],{
 	  }, {
 	    key: 'hide',
 	    value: function hide() {
-	      return this.setState({
-	        show: false });
+	      //   return this.setState({
+	      //     show: false })
 	    }
 	  }, {
 	    key: 'setPosition',
@@ -1141,8 +1141,6 @@ webpackJsonp([1],{
 	            top: selectionRect.top - parentBoundary.top,
 	            left: selectionRect.left - parentBoundary.left + selectionRect.width / 2 - padd
 	          });
-	        } else {
-	          return this.hide();
 	        }
 
 	        /*
