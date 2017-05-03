@@ -49853,7 +49853,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        top: 0,
 	        left: 0
 	      },
-	      show: true,
+	      show: false,
 	      scaled: false,
 	      buttons: [{ type: "left" }, { type: "center" }, { type: "fill" }, { type: "wide" }]
 	    };
@@ -49874,8 +49874,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  DanteImagePopover.prototype.hide = function hide() {
-	    //   return this.setState({
-	    //     show: false })
+	    return this.setState({
+	      show: false });
 	  };
 
 	  DanteImagePopover.prototype.setPosition = function setPosition(coords) {
@@ -49952,7 +49952,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.display(blockType === "image");
 
 	      if (blockType === "image") {
-	        selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.getBoundingClientRect();
+	        //selectionBoundary = node.anchorNode.parentNode.parentNode
+	        //                                   .parentNode.getBoundingClientRect()
+
+	        selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getBoundingClientRect();
+
 	        var el = this.refs.image_popover;
 	        var padd = el.offsetWidth / 2;
 	        return this.setPosition({
