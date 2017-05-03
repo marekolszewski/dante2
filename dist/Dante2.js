@@ -49906,56 +49906,60 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	    if (editorState.getSelection().isCollapsed()) {
-	      var selection = editorState.getSelection();
+	      /*
+	        const selection = editorState.getSelection()
+	        const contentState = editorState.getCurrentContent()
+	        const currentBlock = contentState.getBlockForKey(selection.getStartKey())
+	        //const currentBlock = getCurrentBlock(editorState)
+	        console.log('type', currentBlock.getType())
+	         if (currentBlock.getType() === 'image') {
+	          const node = getNode()
+	          const image = ReactDOM.findDOMNode(node)
+	          const imageBoundary = image.getBoundingClientRect()
+	           const selectionRect = getVisibleSelectionRect(window)
+	          const parent = ReactDOM.findDOMNode(this.props.editor)
+	          const parentBoundary = parent.getBoundingClientRect()
+	          const el = this.refs.image_popover
+	          const padd = el.offsetWidth / 2
+	          return this.setPosition({
+	            top: imageBoundary.top - parentBoundary.top,
+	            left: imageBoundary.left - parentBoundary.left + imageBoundary.width / 2 - padd
+	          })
+	        } 
+	        */
+
+	      var currentBlock = (0, _index.getCurrentBlock)(editorState);
+	      var blockType = currentBlock.getType();
+
 	      var contentState = editorState.getCurrentContent();
-	      var currentBlock = contentState.getBlockForKey(selection.getStartKey());
-	      //const currentBlock = getCurrentBlock(editorState)
-	      //
-	      console.log('type', currentBlock.getType());
+	      var selectionState = editorState.getSelection();
 
-	      if (currentBlock.getType() === 'image') {
-	        var node = (0, _index.getNode)();
-	        var image = _reactDom2['default'].findDOMNode(node);
-	        var imageBoundary = image.getBoundingClientRect();
+	      var block = contentState.getBlockForKey(selectionState.anchorKey);
 
-	        var selectionRect = (0, _draftJs.getVisibleSelectionRect)(window);
-	        var parent = _reactDom2['default'].findDOMNode(this.props.editor);
-	        var parentBoundary = parent.getBoundingClientRect();
+	      var nativeSelection = (0, _selection.getSelection)(window);
+	      if (!nativeSelection.rangeCount) {
+	        return;
+	      }
+
+	      var node = (0, _index.getNode)();
+
+	      var selectionBoundary = (0, _selection.getSelectionRect)(nativeSelection);
+	      var coords = selectionBoundary;
+
+	      var parent = _reactDom2['default'].findDOMNode(this.props.editor);
+	      var parentBoundary = parent.getBoundingClientRect();
+
+	      this.display(blockType === "image");
+
+	      if (blockType === "image") {
+	        selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.getBoundingClientRect();
 	        var el = this.refs.image_popover;
 	        var padd = el.offsetWidth / 2;
 	        return this.setPosition({
-	          top: imageBoundary.top - parentBoundary.top,
-	          left: imageBoundary.left - parentBoundary.left + imageBoundary.width / 2 - padd
-	        });
-	      }
-
-	      /*
-	      let currentBlock = getCurrentBlock(editorState)
-	      let blockType = currentBlock.getType()
-	       let contentState = editorState.getCurrentContent()
-	      let selectionState = editorState.getSelection()
-	       let block = contentState.getBlockForKey(selectionState.anchorKey)
-	       let nativeSelection = getSelection(window)
-	      if (!nativeSelection.rangeCount) {
-	        return
-	      }
-	       let node = getNode()
-	       let selectionBoundary = getSelectionRect(nativeSelection)
-	      let coords = selectionBoundary
-	       let parent = ReactDOM.findDOMNode(this.props.editor)
-	      let parentBoundary = parent.getBoundingClientRect()
-	       this.display(blockType === "image")
-	       if (blockType === "image") {
-	        selectionBoundary = node.anchorNode.parentNode.parentNode
-	                                           .parentNode.getBoundingClientRect()
-	        let el = this.refs.image_popover
-	        let padd = el.offsetWidth / 2
-	        return this.setPosition({
 	          top: selectionBoundary.top - parentBoundary.top + 60,
 	          left: selectionBoundary.left + selectionBoundary.width / 2 - padd
-	        })
+	        });
 	      }
-	      */
 	    } else {
 	      return this.hide();
 	    }
