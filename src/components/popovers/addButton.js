@@ -212,7 +212,8 @@ class DanteInlineTooltip extends React.Component {
       let parent = ReactDOM.findDOMNode(this.props.editor)
       let parentBoundary = parent.getBoundingClientRect()
 
-      console.log('parentBoundary', parentBoundary)
+      console.log('parentBoundary.top', parentBoundary.top + window.scrollY)
+      console.log('coords.top', coords.top + window.scrollY)
 
       // hide if selected node is not in editor
       // debugger
@@ -226,8 +227,8 @@ class DanteInlineTooltip extends React.Component {
       // checkeamos si esta vacio
       this.display(block.getText().length === 0 && blockType === "unstyled")
       return this.setPosition({
-        top: coords.top - parentBoundary.top + window.scrollY,
-        left: coords.left - parentBoundary.left + window.scrollX - 60
+        top: coords.top - parentBoundary.top
+        left: coords.left - parentBoundary.left - 60
       })
 
       /*
