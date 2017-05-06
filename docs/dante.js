@@ -116,7 +116,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 426:
+/***/ 427:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -328,7 +328,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 427:
+/***/ 428:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -443,7 +443,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 428:
+/***/ 429:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -452,7 +452,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(430);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -636,7 +636,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 431:
+/***/ 432:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -665,7 +665,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 432:
+/***/ 433:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -674,7 +674,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(430);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -686,7 +686,7 @@ webpackJsonp([1],{
 
 	var _createClass3 = _interopRequireDefault(_createClass2);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(434);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -853,7 +853,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 458:
+/***/ 459:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -862,7 +862,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(429);
+	var _stringify = __webpack_require__(430);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -997,7 +997,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 459:
+/***/ 460:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1036,9 +1036,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(461);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1126,6 +1126,27 @@ webpackJsonp([1],{
 
 
 	      if (editorState.getSelection().isCollapsed()) {
+	        /*
+	          const selection = editorState.getSelection()
+	          const contentState = editorState.getCurrentContent()
+	          const currentBlock = contentState.getBlockForKey(selection.getStartKey())
+	          //const currentBlock = getCurrentBlock(editorState)
+	          console.log('type', currentBlock.getType())
+	           if (currentBlock.getType() === 'image') {
+	            const node = getNode()
+	            const image = ReactDOM.findDOMNode(node)
+	            const imageBoundary = image.getBoundingClientRect()
+	             const selectionRect = getVisibleSelectionRect(window)
+	            const parent = ReactDOM.findDOMNode(this.props.editor)
+	            const parentBoundary = parent.getBoundingClientRect()
+	            const el = this.refs.image_popover
+	            const padd = el.offsetWidth / 2
+	            return this.setPosition({
+	              top: imageBoundary.top - parentBoundary.top,
+	              left: imageBoundary.left - parentBoundary.left + imageBoundary.width / 2 - padd
+	            })
+	          } 
+	          */
 
 	        var currentBlock = (0, _index.getCurrentBlock)(editorState);
 	        var blockType = currentBlock.getType();
@@ -1151,7 +1172,11 @@ webpackJsonp([1],{
 	        this.display(blockType === "image");
 
 	        if (blockType === "image") {
-	          selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.getBoundingClientRect();
+	          //selectionBoundary = node.anchorNode.parentNode.parentNode
+	          //                                   .parentNode.getBoundingClientRect()
+
+	          selectionBoundary = node.anchorNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getBoundingClientRect();
+
 	          var el = this.refs.image_popover;
 	          var padd = el.offsetWidth / 2;
 	          return this.setPosition({
@@ -1259,7 +1284,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 460:
+/***/ 461:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1323,7 +1348,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 461:
+/***/ 462:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1360,7 +1385,7 @@ webpackJsonp([1],{
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1486,7 +1511,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 462:
+/***/ 463:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1525,9 +1550,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(461);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -1755,6 +1780,9 @@ webpackJsonp([1],{
 	        var parent = _reactDom2['default'].findDOMNode(this.props.editor);
 	        var parentBoundary = parent.getBoundingClientRect();
 
+	        console.log('parentBoundary.top', parentBoundary.top + window.scrollY);
+	        console.log('coords.top', coords.top + window.scrollY);
+
 	        // hide if selected node is not in editor
 	        // debugger
 	        //console.log @isDescendant(parent, nativeSelection.anchorNode)
@@ -1767,8 +1795,8 @@ webpackJsonp([1],{
 	        // checkeamos si esta vacio
 	        this.display(block.getText().length === 0 && blockType === "unstyled");
 	        return this.setPosition({
-	          top: coords.top + window.scrollY,
-	          left: coords.left + window.scrollX - 60
+	          top: coords.top - parentBoundary.top,
+	          left: coords.left - parentBoundary.left - 60
 	        });
 
 	        /*
@@ -1884,7 +1912,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 463:
+/***/ 464:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1923,9 +1951,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _selection = __webpack_require__(460);
+	var _selection = __webpack_require__(461);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -2392,7 +2420,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 464:
+/***/ 465:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2401,7 +2429,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(466);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -2435,11 +2463,11 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(434);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -2888,7 +2916,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 469:
+/***/ 470:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2927,11 +2955,11 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(434);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -3085,7 +3113,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 470:
+/***/ 471:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3094,7 +3122,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(466);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
@@ -3128,9 +3156,9 @@ webpackJsonp([1],{
 
 	var _draftJs = __webpack_require__(274);
 
-	var _index = __webpack_require__(426);
+	var _index = __webpack_require__(427);
 
-	var _axios = __webpack_require__(433);
+	var _axios = __webpack_require__(434);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
@@ -3235,7 +3263,7 @@ webpackJsonp([1],{
 
 /***/ },
 
-/***/ 471:
+/***/ 472:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3244,7 +3272,7 @@ webpackJsonp([1],{
 	  value: true
 	});
 
-	var _assign = __webpack_require__(465);
+	var _assign = __webpack_require__(466);
 
 	var _assign2 = _interopRequireDefault(_assign);
 

@@ -54,7 +54,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(413);
+	__webpack_require__(414);
 	__webpack_require__(254);
 	__webpack_require__(23);
 	module.exports = __webpack_require__(52);
@@ -20474,258 +20474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule Draft
-	 */
-
-	'use strict';
-
-	var AtomicBlockUtils = __webpack_require__(255);
-	var BlockMapBuilder = __webpack_require__(256);
-	var CharacterMetadata = __webpack_require__(258);
-	var CompositeDraftDecorator = __webpack_require__(290);
-	var ContentBlock = __webpack_require__(259);
-	var ContentState = __webpack_require__(282);
-	var DefaultDraftBlockRenderMap = __webpack_require__(291);
-	var DefaultDraftInlineStyle = __webpack_require__(293);
-	var DraftEditor = __webpack_require__(294);
-	var DraftEditorBlock = __webpack_require__(300);
-	var DraftModifier = __webpack_require__(261);
-	var DraftEntity = __webpack_require__(266);
-	var DraftEntityInstance = __webpack_require__(268);
-	var EditorState = __webpack_require__(280);
-	var KeyBindingUtil = __webpack_require__(340);
-	var RichTextEditorUtil = __webpack_require__(371);
-	var SelectionState = __webpack_require__(283);
-
-	var convertFromDraftStateToRaw = __webpack_require__(373);
-	var convertFromHTMLToContentBlocks = __webpack_require__(363);
-	var convertFromRawToDraftState = __webpack_require__(377);
-	var generateRandomKey = __webpack_require__(272);
-	var getDefaultKeyBinding = __webpack_require__(370);
-	var getVisibleSelectionRect = __webpack_require__(381);
-
-	var DraftPublic = {
-	  Editor: DraftEditor,
-	  EditorBlock: DraftEditorBlock,
-	  EditorState: EditorState,
-
-	  CompositeDecorator: CompositeDraftDecorator,
-	  Entity: DraftEntity,
-	  EntityInstance: DraftEntityInstance,
-
-	  BlockMapBuilder: BlockMapBuilder,
-	  CharacterMetadata: CharacterMetadata,
-	  ContentBlock: ContentBlock,
-	  ContentState: ContentState,
-	  SelectionState: SelectionState,
-
-	  AtomicBlockUtils: AtomicBlockUtils,
-	  KeyBindingUtil: KeyBindingUtil,
-	  Modifier: DraftModifier,
-	  RichUtils: RichTextEditorUtil,
-
-	  DefaultDraftBlockRenderMap: DefaultDraftBlockRenderMap,
-	  DefaultDraftInlineStyle: DefaultDraftInlineStyle,
-
-	  convertFromHTML: convertFromHTMLToContentBlocks,
-	  convertFromRaw: convertFromRawToDraftState,
-	  convertToRaw: convertFromDraftStateToRaw,
-	  genKey: generateRandomKey,
-	  getDefaultKeyBinding: getDefaultKeyBinding,
-	  getVisibleSelectionRect: getVisibleSelectionRect
-	};
-
-	module.exports = DraftPublic;
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule AtomicBlockUtils
-	 * @typechecks
-	 * 
-	 */
-
-	'use strict';
-
-	var BlockMapBuilder = __webpack_require__(256);
-	var CharacterMetadata = __webpack_require__(258);
-	var ContentBlock = __webpack_require__(259);
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
-	var Immutable = __webpack_require__(257);
-
-	var generateRandomKey = __webpack_require__(272);
-
-	var List = Immutable.List;
-	var Repeat = Immutable.Repeat;
-
-
-	var AtomicBlockUtils = {
-	  insertAtomicBlock: function insertAtomicBlock(editorState, entityKey, character) {
-	    var contentState = editorState.getCurrentContent();
-	    var selectionState = editorState.getSelection();
-
-	    var afterRemoval = DraftModifier.removeRange(contentState, selectionState, 'backward');
-
-	    var targetSelection = afterRemoval.getSelectionAfter();
-	    var afterSplit = DraftModifier.splitBlock(afterRemoval, targetSelection);
-	    var insertionTarget = afterSplit.getSelectionAfter();
-
-	    var asAtomicBlock = DraftModifier.setBlockType(afterSplit, insertionTarget, 'atomic');
-
-	    var charData = CharacterMetadata.create({ entity: entityKey });
-
-	    var fragmentArray = [new ContentBlock({
-	      key: generateRandomKey(),
-	      type: 'atomic',
-	      text: character,
-	      characterList: List(Repeat(charData, character.length))
-	    }), new ContentBlock({
-	      key: generateRandomKey(),
-	      type: 'unstyled',
-	      text: '',
-	      characterList: List()
-	    })];
-
-	    var fragment = BlockMapBuilder.createFromArray(fragmentArray);
-
-	    var withAtomicBlock = DraftModifier.replaceWithFragment(asAtomicBlock, insertionTarget, fragment);
-
-	    var newContent = withAtomicBlock.merge({
-	      selectionBefore: selectionState,
-	      selectionAfter: withAtomicBlock.getSelectionAfter().set('hasFocus', true)
-	    });
-
-	    return EditorState.push(editorState, newContent, 'insert-fragment');
-	  }
-	};
-
-	module.exports = AtomicBlockUtils;
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule BlockMapBuilder
-	 * 
-	 */
-
-	'use strict';
-
-	var Immutable = __webpack_require__(257);
-
-	var OrderedMap = Immutable.OrderedMap;
-
-
-	var BlockMapBuilder = {
-	  createFromArray: function createFromArray(blocks) {
-	    return OrderedMap(blocks.map(function (block) {
-	      return [block.getKey(), block];
-	    }));
-	  }
-	};
-
-	module.exports = BlockMapBuilder;
-
-/***/ },
-/* 257 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25712,7 +25461,257 @@ return /******/ (function(modules) { // webpackBootstrap
 	}));
 
 /***/ },
-/* 258 */
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule Draft
+	 */
+
+	'use strict';
+
+	var AtomicBlockUtils = __webpack_require__(255);
+	var BlockMapBuilder = __webpack_require__(256);
+	var CharacterMetadata = __webpack_require__(257);
+	var CompositeDraftDecorator = __webpack_require__(288);
+	var ContentBlock = __webpack_require__(258);
+	var ContentState = __webpack_require__(278);
+	var DefaultDraftBlockRenderMap = __webpack_require__(289);
+	var DefaultDraftInlineStyle = __webpack_require__(291);
+	var DraftEditor = __webpack_require__(292);
+	var DraftEditorBlock = __webpack_require__(298);
+	var DraftEntity = __webpack_require__(279);
+	var DraftModifier = __webpack_require__(260);
+	var DraftEntityInstance = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
+	var KeyBindingUtil = __webpack_require__(340);
+	var RichTextEditorUtil = __webpack_require__(371);
+	var SelectionState = __webpack_require__(281);
+
+	var convertFromDraftStateToRaw = __webpack_require__(373);
+	var convertFromHTMLToContentBlocks = __webpack_require__(363);
+	var convertFromRawToDraftState = __webpack_require__(377);
+	var generateRandomKey = __webpack_require__(268);
+	var getDefaultKeyBinding = __webpack_require__(370);
+	var getVisibleSelectionRect = __webpack_require__(381);
+
+	var DraftPublic = {
+	  Editor: DraftEditor,
+	  EditorBlock: DraftEditorBlock,
+	  EditorState: EditorState,
+
+	  CompositeDecorator: CompositeDraftDecorator,
+	  Entity: DraftEntity,
+	  EntityInstance: DraftEntityInstance,
+
+	  BlockMapBuilder: BlockMapBuilder,
+	  CharacterMetadata: CharacterMetadata,
+	  ContentBlock: ContentBlock,
+	  ContentState: ContentState,
+	  SelectionState: SelectionState,
+
+	  AtomicBlockUtils: AtomicBlockUtils,
+	  KeyBindingUtil: KeyBindingUtil,
+	  Modifier: DraftModifier,
+	  RichUtils: RichTextEditorUtil,
+
+	  DefaultDraftBlockRenderMap: DefaultDraftBlockRenderMap,
+	  DefaultDraftInlineStyle: DefaultDraftInlineStyle,
+
+	  convertFromHTML: convertFromHTMLToContentBlocks,
+	  convertFromRaw: convertFromRawToDraftState,
+	  convertToRaw: convertFromDraftStateToRaw,
+	  genKey: generateRandomKey,
+	  getDefaultKeyBinding: getDefaultKeyBinding,
+	  getVisibleSelectionRect: getVisibleSelectionRect
+	};
+
+	module.exports = DraftPublic;
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule AtomicBlockUtils
+	 * @typechecks
+	 * 
+	 */
+
+	'use strict';
+
+	var BlockMapBuilder = __webpack_require__(256);
+	var CharacterMetadata = __webpack_require__(257);
+	var ContentBlock = __webpack_require__(258);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
+	var Immutable = __webpack_require__(185);
+
+	var generateRandomKey = __webpack_require__(268);
+
+	var List = Immutable.List;
+	var Repeat = Immutable.Repeat;
+
+
+	var AtomicBlockUtils = {
+	  insertAtomicBlock: function insertAtomicBlock(editorState, entityKey, character) {
+	    var contentState = editorState.getCurrentContent();
+	    var selectionState = editorState.getSelection();
+
+	    var afterRemoval = DraftModifier.removeRange(contentState, selectionState, 'backward');
+
+	    var targetSelection = afterRemoval.getSelectionAfter();
+	    var afterSplit = DraftModifier.splitBlock(afterRemoval, targetSelection);
+	    var insertionTarget = afterSplit.getSelectionAfter();
+
+	    var asAtomicBlock = DraftModifier.setBlockType(afterSplit, insertionTarget, 'atomic');
+
+	    var charData = CharacterMetadata.create({ entity: entityKey });
+
+	    var fragmentArray = [new ContentBlock({
+	      key: generateRandomKey(),
+	      type: 'atomic',
+	      text: character,
+	      characterList: List(Repeat(charData, character.length))
+	    }), new ContentBlock({
+	      key: generateRandomKey(),
+	      type: 'unstyled',
+	      text: '',
+	      characterList: List()
+	    })];
+
+	    var fragment = BlockMapBuilder.createFromArray(fragmentArray);
+
+	    var withAtomicBlock = DraftModifier.replaceWithFragment(asAtomicBlock, insertionTarget, fragment);
+
+	    var newContent = withAtomicBlock.merge({
+	      selectionBefore: selectionState,
+	      selectionAfter: withAtomicBlock.getSelectionAfter().set('hasFocus', true)
+	    });
+
+	    return EditorState.push(editorState, newContent, 'insert-fragment');
+	  }
+	};
+
+	module.exports = AtomicBlockUtils;
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule BlockMapBuilder
+	 * 
+	 */
+
+	'use strict';
+
+	var Immutable = __webpack_require__(185);
+
+	var OrderedMap = Immutable.OrderedMap;
+
+
+	var BlockMapBuilder = {
+	  createFromArray: function createFromArray(blocks) {
+	    return OrderedMap(blocks.map(function (block) {
+	      return [block.getKey(), block];
+	    }));
+	  }
+	};
+
+	module.exports = BlockMapBuilder;
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25736,12 +25735,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var _require = __webpack_require__(257);
+	var _require = __webpack_require__(185);
 
 	var Map = _require.Map;
 	var OrderedSet = _require.OrderedSet;
 	var Record = _require.Record;
 
+	// Immutable.map is typed such that the value for every key in the map
+	// must be the same type
 
 	var EMPTY_SET = OrderedSet();
 
@@ -25801,8 +25802,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return EMPTY;
 	    }
 
+	    var defaultConfig = { style: EMPTY_SET, entity: null };
+
 	    // Fill in unspecified properties, if necessary.
-	    var configMap = Map({ style: EMPTY_SET, entity: null }).merge(config);
+	    var configMap = Map(defaultConfig).merge(config);
 
 	    var existing = pool.get(configMap);
 	    if (existing) {
@@ -25825,7 +25828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CharacterMetadata;
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25848,9 +25851,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
-	var findRangesImmutable = __webpack_require__(260);
+	var findRangesImmutable = __webpack_require__(259);
 
 	var List = Immutable.List;
 	var Map = Immutable.Map;
@@ -25950,7 +25953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ContentBlock;
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/**
@@ -25999,7 +26002,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = findRangesImmutable;
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26017,20 +26020,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
-	var ContentStateInlineStyle = __webpack_require__(262);
-	var Immutable = __webpack_require__(257);
+	var CharacterMetadata = __webpack_require__(257);
+	var ContentStateInlineStyle = __webpack_require__(261);
+	var Immutable = __webpack_require__(185);
 
-	var applyEntityToContentState = __webpack_require__(263);
-	var getCharacterRemovalRange = __webpack_require__(265);
-	var getContentStateFragment = __webpack_require__(271);
-	var insertFragmentIntoContentState = __webpack_require__(274);
-	var insertTextIntoContentState = __webpack_require__(276);
+	var applyEntityToContentState = __webpack_require__(262);
+	var getCharacterRemovalRange = __webpack_require__(264);
+	var getContentStateFragment = __webpack_require__(267);
+	var insertFragmentIntoContentState = __webpack_require__(270);
+	var insertTextIntoContentState = __webpack_require__(272);
 	var invariant = __webpack_require__(29);
-	var modifyBlockForContentState = __webpack_require__(277);
-	var removeEntitiesAtEdges = __webpack_require__(273);
-	var removeRangeFromContentState = __webpack_require__(278);
-	var splitBlockInContentState = __webpack_require__(279);
+	var modifyBlockForContentState = __webpack_require__(273);
+	var removeEntitiesAtEdges = __webpack_require__(269);
+	var removeRangeFromContentState = __webpack_require__(274);
+	var splitBlockInContentState = __webpack_require__(275);
 
 	var OrderedSet = Immutable.OrderedSet;
 
@@ -26090,7 +26093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var startEntity = block.getEntityAt(startOffset);
 	      var endEntity = block.getEntityAt(endOffset - 1);
 	      if (startEntity && startEntity === endEntity) {
-	        var adjustedRemovalRange = getCharacterRemovalRange(block, rangeToRemove, removalDirection);
+	        var adjustedRemovalRange = getCharacterRemovalRange(contentState.getEntityMap(), block, rangeToRemove, removalDirection);
 	        return removeRangeFromContentState(contentState, adjustedRemovalRange);
 	      }
 	    }
@@ -26141,7 +26144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftModifier;
 
 /***/ },
-/* 262 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26159,9 +26162,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
+	var CharacterMetadata = __webpack_require__(257);
 
-	var _require = __webpack_require__(257);
+	var _require = __webpack_require__(185);
 
 	var Map = _require.Map;
 
@@ -26220,7 +26223,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ContentStateInlineStyle;
 
 /***/ },
-/* 263 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26238,9 +26241,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
-	var applyEntityToContentBlock = __webpack_require__(264);
+	var applyEntityToContentBlock = __webpack_require__(263);
 
 	function applyEntityToContentState(contentState, selectionState, entityKey) {
 	  var blockMap = contentState.getBlockMap();
@@ -26269,7 +26272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = applyEntityToContentState;
 
 /***/ },
-/* 264 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26287,7 +26290,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
+	var CharacterMetadata = __webpack_require__(257);
 
 	function applyEntityToContentBlock(contentBlock, start, end, entityKey) {
 	  var characterList = contentBlock.getCharacterList();
@@ -26301,7 +26304,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = applyEntityToContentBlock;
 
 /***/ },
-/* 265 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26319,10 +26322,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftEntity = __webpack_require__(266);
-	var DraftEntitySegments = __webpack_require__(269);
+	var DraftEntitySegments = __webpack_require__(265);
 
-	var getRangesForDraftEntity = __webpack_require__(270);
+	var getRangesForDraftEntity = __webpack_require__(266);
 	var invariant = __webpack_require__(29);
 
 	/**
@@ -26334,7 +26336,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * range, the entire entity must be removed. The returned `SelectionState`
 	 * will be adjusted accordingly.
 	 */
-	function getCharacterRemovalRange(block, selectionState, direction) {
+	function getCharacterRemovalRange(entityMap, block, selectionState, direction) {
 	  var start = selectionState.getStartOffset();
 	  var end = selectionState.getEndOffset();
 	  var entityKey = block.getEntityAt(start);
@@ -26342,7 +26344,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return selectionState;
 	  }
 
-	  var entity = DraftEntity.get(entityKey);
+	  var entity = entityMap.__get(entityKey);
 	  var mutability = entity.getMutability();
 
 	  // `MUTABLE` entities can just have the specified range of text removed
@@ -26383,273 +26385,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getCharacterRemovalRange;
 
 /***/ },
-/* 266 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _assign = __webpack_require__(267);
-
-	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule DraftEntity
-	 * @typechecks
-	 * 
-	 */
-
-	var DraftEntityInstance = __webpack_require__(268);
-	var Immutable = __webpack_require__(257);
-
-	var invariant = __webpack_require__(29);
-
-	var Map = Immutable.Map;
-
-
-	var instances = Map();
-	var instanceKey = 0;
-
-	/**
-	 * A "document entity" is an object containing metadata associated with a
-	 * piece of text in a ContentBlock.
-	 *
-	 * For example, a `link` entity might include a `uri` property. When a
-	 * ContentBlock is rendered in the browser, text that refers to that link
-	 * entity may be rendered as an anchor, with the `uri` as the href value.
-	 *
-	 * In a ContentBlock, every position in the text may correspond to zero
-	 * or one entities. This correspondence is tracked using a key string,
-	 * generated via DraftEntity.create() and used to obtain entity metadata
-	 * via DraftEntity.get().
-	 */
-	var DraftEntity = {
-	  /**
-	   * Create a DraftEntityInstance and store it for later retrieval.
-	   *
-	   * A random key string will be generated and returned. This key may
-	   * be used to track the entity's usage in a ContentBlock, and for
-	   * retrieving data about the entity at render time.
-	   */
-	  create: function create(type, mutability, data) {
-	    return DraftEntity.add(new DraftEntityInstance({ type: type, mutability: mutability, data: data || {} }));
-	  },
-
-	  /**
-	   * Add an existing DraftEntityInstance to the DraftEntity map. This is
-	   * useful when restoring instances from the server.
-	   */
-	  add: function add(instance) {
-	    var key = '' + ++instanceKey;
-	    instances = instances.set(key, instance);
-	    return key;
-	  },
-
-	  /**
-	   * Retrieve the entity corresponding to the supplied key string.
-	   */
-	  get: function get(key) {
-	    var instance = instances.get(key);
-	    !!!instance ?  false ? invariant(false, 'Unknown DraftEntity key.') : invariant(false) : void 0;
-	    return instance;
-	  },
-
-	  /**
-	   * Entity instances are immutable. If you need to update the data for an
-	   * instance, this method will merge your data updates and return a new
-	   * instance.
-	   */
-	  mergeData: function mergeData(key, toMerge) {
-	    var instance = DraftEntity.get(key);
-	    var newData = _extends({}, instance.getData(), toMerge);
-	    var newInstance = instance.set('data', newData);
-	    instances = instances.set(key, newInstance);
-	    return newInstance;
-	  },
-
-	  /**
-	   * Completely replace the data for a given instance.
-	   */
-	  replaceData: function replaceData(key, newData) {
-	    var instance = DraftEntity.get(key);
-	    var newInstance = instance.set('data', newData);
-	    instances = instances.set(key, newInstance);
-	    return newInstance;
-	  }
-	};
-
-	module.exports = DraftEntity;
-
-/***/ },
-/* 267 */
-/***/ function(module, exports) {
-
-	'use strict';
-	/* eslint-disable no-unused-vars */
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	function shouldUseNative() {
-		try {
-			if (!Object.assign) {
-				return false;
-			}
-
-			// Detect buggy property enumeration order in older V8 versions.
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line
-			test1[5] = 'de';
-			if (Object.getOwnPropertyNames(test1)[0] === '5') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test2 = {};
-			for (var i = 0; i < 10; i++) {
-				test2['_' + String.fromCharCode(i)] = i;
-			}
-			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-				return test2[n];
-			});
-			if (order2.join('') !== '0123456789') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test3 = {};
-			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-				test3[letter] = letter;
-			});
-			if (Object.keys(Object.assign({}, test3)).join('') !==
-					'abcdefghijklmnopqrst') {
-				return false;
-			}
-
-			return true;
-		} catch (e) {
-			// We don't expect any of the above to throw, but better to be safe.
-			return false;
-		}
-	}
-
-	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-/* 268 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule DraftEntityInstance
-	 * 
-	 */
-
-	'use strict';
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Immutable = __webpack_require__(257);
-
-	var Record = Immutable.Record;
-
-
-	var DraftEntityInstanceRecord = Record({
-	  type: 'TOKEN',
-	  mutability: 'IMMUTABLE',
-	  data: Object
-	});
-
-	/**
-	 * An instance of a document entity, consisting of a `type` and relevant
-	 * `data`, metadata about the entity.
-	 *
-	 * For instance, a "link" entity might provide a URI, and a "mention"
-	 * entity might provide the mentioned user's ID. These pieces of data
-	 * may be used when rendering the entity as part of a ContentBlock DOM
-	 * representation. For a link, the data would be used as an href for
-	 * the rendered anchor. For a mention, the ID could be used to retrieve
-	 * a hovercard.
-	 */
-
-	var DraftEntityInstance = function (_DraftEntityInstanceR) {
-	  _inherits(DraftEntityInstance, _DraftEntityInstanceR);
-
-	  function DraftEntityInstance() {
-	    _classCallCheck(this, DraftEntityInstance);
-
-	    return _possibleConstructorReturn(this, _DraftEntityInstanceR.apply(this, arguments));
-	  }
-
-	  DraftEntityInstance.prototype.getType = function getType() {
-	    return this.get('type');
-	  };
-
-	  DraftEntityInstance.prototype.getMutability = function getMutability() {
-	    return this.get('mutability');
-	  };
-
-	  DraftEntityInstance.prototype.getData = function getData() {
-	    return this.get('data');
-	  };
-
-	  return DraftEntityInstance;
-	}(DraftEntityInstanceRecord);
-
-	module.exports = DraftEntityInstance;
-
-/***/ },
-/* 269 */
+/* 265 */
 /***/ function(module, exports) {
 
 	/**
@@ -26753,7 +26489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEntitySegments;
 
 /***/ },
-/* 270 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26797,7 +26533,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getRangesForDraftEntity;
 
 /***/ },
-/* 271 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26815,8 +26551,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var generateRandomKey = __webpack_require__(272);
-	var removeEntitiesAtEdges = __webpack_require__(273);
+	var generateRandomKey = __webpack_require__(268);
+	var removeEntitiesAtEdges = __webpack_require__(269);
 
 	function getContentStateFragment(contentState, selectionState) {
 	  var startKey = selectionState.getStartKey();
@@ -26873,7 +26609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getContentStateFragment;
 
 /***/ },
-/* 272 */
+/* 268 */
 /***/ function(module, exports) {
 
 	/**
@@ -26906,7 +26642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = generateRandomKey;
 
 /***/ },
-/* 273 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26923,21 +26659,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
-	var DraftEntity = __webpack_require__(266);
+	var CharacterMetadata = __webpack_require__(257);
 
-	var findRangesImmutable = __webpack_require__(260);
+	var findRangesImmutable = __webpack_require__(259);
 	var invariant = __webpack_require__(29);
 
 	function removeEntitiesAtEdges(contentState, selectionState) {
 	  var blockMap = contentState.getBlockMap();
+	  var entityMap = contentState.getEntityMap();
 
 	  var updatedBlocks = {};
 
 	  var startKey = selectionState.getStartKey();
 	  var startOffset = selectionState.getStartOffset();
 	  var startBlock = blockMap.get(startKey);
-	  var updatedStart = removeForBlock(startBlock, startOffset);
+	  var updatedStart = removeForBlock(entityMap, startBlock, startOffset);
 
 	  if (updatedStart !== startBlock) {
 	    updatedBlocks[startKey] = updatedStart;
@@ -26950,7 +26686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    endBlock = updatedStart;
 	  }
 
-	  var updatedEnd = removeForBlock(endBlock, endOffset);
+	  var updatedEnd = removeForBlock(entityMap, endBlock, endOffset);
 
 	  if (updatedEnd !== endBlock) {
 	    updatedBlocks[endKey] = updatedEnd;
@@ -26981,7 +26717,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return removalRange;
 	}
 
-	function removeForBlock(block, offset) {
+	function removeForBlock(entityMap, block, offset) {
 	  var chars = block.getCharacterList();
 	  var charBefore = offset > 0 ? chars.get(offset - 1) : undefined;
 	  var charAfter = offset < chars.count() ? chars.get(offset) : undefined;
@@ -26989,7 +26725,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var entityAfterCursor = charAfter ? charAfter.getEntity() : undefined;
 
 	  if (entityAfterCursor && entityAfterCursor === entityBeforeCursor) {
-	    var entity = DraftEntity.get(entityAfterCursor);
+	    var entity = entityMap.__get(entityAfterCursor);
 	    if (entity.getMutability() !== 'MUTABLE') {
 	      var _getRemovalRange = getRemovalRange(chars, entityAfterCursor, offset);
 
@@ -27012,7 +26748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = removeEntitiesAtEdges;
 
 /***/ },
-/* 274 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27032,8 +26768,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var BlockMapBuilder = __webpack_require__(256);
 
-	var generateRandomKey = __webpack_require__(272);
-	var insertIntoList = __webpack_require__(275);
+	var generateRandomKey = __webpack_require__(268);
+	var insertIntoList = __webpack_require__(271);
 	var invariant = __webpack_require__(29);
 
 	function insertFragmentIntoContentState(contentState, selectionState, fragment) {
@@ -27143,7 +26879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = insertFragmentIntoContentState;
 
 /***/ },
-/* 275 */
+/* 271 */
 /***/ function(module, exports) {
 
 	/**
@@ -27183,7 +26919,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = insertIntoList;
 
 /***/ },
-/* 276 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27201,9 +26937,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
-	var insertIntoList = __webpack_require__(275);
+	var insertIntoList = __webpack_require__(271);
 	var invariant = __webpack_require__(29);
 
 	var Repeat = Immutable.Repeat;
@@ -27242,7 +26978,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = insertTextIntoContentState;
 
 /***/ },
-/* 277 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27260,7 +26996,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	var Map = Immutable.Map;
 
@@ -27285,7 +27021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = modifyBlockForContentState;
 
 /***/ },
-/* 278 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27302,7 +27038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	function removeRangeFromContentState(contentState, selectionState) {
 	  if (selectionState.isCollapsed()) {
@@ -27381,7 +27117,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = removeRangeFromContentState;
 
 /***/ },
-/* 279 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27399,9 +27135,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
-	var generateRandomKey = __webpack_require__(272);
+	var generateRandomKey = __webpack_require__(268);
 	var invariant = __webpack_require__(29);
 
 	var Map = Immutable.Map;
@@ -27455,7 +27191,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = splitBlockInContentState;
 
 /***/ },
-/* 280 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27472,17 +27208,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var BlockTree = __webpack_require__(281);
-	var ContentState = __webpack_require__(282);
-	var EditorBidiService = __webpack_require__(285);
-	var Immutable = __webpack_require__(257);
-	var SelectionState = __webpack_require__(283);
+	var BlockTree = __webpack_require__(277);
+	var ContentState = __webpack_require__(278);
+	var EditorBidiService = __webpack_require__(283);
+	var Immutable = __webpack_require__(185);
+	var SelectionState = __webpack_require__(281);
 
 	var OrderedSet = Immutable.OrderedSet;
 	var Record = Immutable.Record;
@@ -27550,7 +27286,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var treeMap = state.get('treeMap');
 	        var newTreeMap;
 	        if (decorator && existingDecorator) {
-	          newTreeMap = regenerateTreeForNewDecorator(newContent.getBlockMap(), treeMap, decorator, existingDecorator);
+	          newTreeMap = regenerateTreeForNewDecorator(newContent, newContent.getBlockMap(), treeMap, decorator, existingDecorator);
 	        } else {
 	          newTreeMap = generateNewTreeMap(newContent, decorator);
 	        }
@@ -27565,7 +27301,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var existingContent = editorState.getCurrentContent();
 	      if (newContent !== existingContent) {
-	        state.set('treeMap', regenerateTreeForNewBlocks(editorState, newContent.getBlockMap(), decorator));
+	        state.set('treeMap', regenerateTreeForNewBlocks(editorState, newContent.getBlockMap(), newContent.getEntityMap(), decorator));
 	      }
 
 	      state.merge(put);
@@ -27917,7 +27653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function generateNewTreeMap(contentState, decorator) {
 	  return contentState.getBlockMap().map(function (block) {
-	    return BlockTree.generate(block, decorator);
+	    return BlockTree.generate(contentState, block, decorator);
 	  }).toOrderedMap();
 	}
 
@@ -27926,13 +27662,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * between the current editorState and newContent. Returns an OrderedMap
 	 * with only changed regenerated tree map objects.
 	 */
-	function regenerateTreeForNewBlocks(editorState, newBlockMap, decorator) {
-	  var prevBlockMap = editorState.getCurrentContent().getBlockMap();
+	function regenerateTreeForNewBlocks(editorState, newBlockMap, newEntityMap, decorator) {
+	  var contentState = editorState.getCurrentContent().set('entityMap', newEntityMap);
+	  var prevBlockMap = contentState.getBlockMap();
 	  var prevTreeMap = editorState.getImmutable().get('treeMap');
 	  return prevTreeMap.merge(newBlockMap.toSeq().filter(function (block, key) {
 	    return block !== prevBlockMap.get(key);
 	  }).map(function (block) {
-	    return BlockTree.generate(block, decorator);
+	    return BlockTree.generate(contentState, block, decorator);
 	  }));
 	}
 
@@ -27944,11 +27681,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * decorators should be preserved when possible to allow for direct immutable
 	 * List comparison.
 	 */
-	function regenerateTreeForNewDecorator(blockMap, previousTreeMap, decorator, existingDecorator) {
+	function regenerateTreeForNewDecorator(content, blockMap, previousTreeMap, decorator, existingDecorator) {
 	  return previousTreeMap.merge(blockMap.toSeq().filter(function (block) {
-	    return decorator.getDecorations(block) !== existingDecorator.getDecorations(block);
+	    return decorator.getDecorations(block, content) !== existingDecorator.getDecorations(block, content);
 	  }).map(function (block) {
-	    return BlockTree.generate(block, decorator);
+	    return BlockTree.generate(content, block, decorator);
 	  }));
 	}
 
@@ -28021,7 +27758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EditorState;
 
 /***/ },
-/* 281 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28038,10 +27775,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	var emptyFunction = __webpack_require__(33);
-	var findRangesImmutable = __webpack_require__(260);
+	var findRangesImmutable = __webpack_require__(259);
 
 	var List = Immutable.List;
 	var Repeat = Immutable.Repeat;
@@ -28072,7 +27809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Generate a block tree for a given ContentBlock/decorator pair.
 	   */
-	  generate: function generate(block, decorator) {
+	  generate: function generate(contentState, block, decorator) {
 	    var textLength = block.getLength();
 	    if (!textLength) {
 	      return List.of(new DecoratorRange({
@@ -28084,7 +27821,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var leafSets = [];
-	    var decorations = decorator ? decorator.getDecorations(block) : List(Repeat(null, textLength));
+	    var decorations = decorator ? decorator.getDecorations(block, contentState) : List(Repeat(null, textLength));
 
 	    var chars = block.getCharacterList();
 
@@ -28138,7 +27875,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = BlockTree;
 
 /***/ },
-/* 282 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28163,13 +27900,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var BlockMapBuilder = __webpack_require__(256);
-	var CharacterMetadata = __webpack_require__(258);
-	var ContentBlock = __webpack_require__(259);
-	var Immutable = __webpack_require__(257);
-	var SelectionState = __webpack_require__(283);
+	var CharacterMetadata = __webpack_require__(257);
+	var ContentBlock = __webpack_require__(258);
+	var DraftEntity = __webpack_require__(279);
+	var Immutable = __webpack_require__(185);
+	var SelectionState = __webpack_require__(281);
 
-	var generateRandomKey = __webpack_require__(272);
-	var sanitizeDraftText = __webpack_require__(284);
+	var generateRandomKey = __webpack_require__(268);
+	var sanitizeDraftText = __webpack_require__(282);
 
 	var List = Immutable.List;
 	var Record = Immutable.Record;
@@ -28177,6 +27915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	var defaultRecord = {
+	  entityMap: null,
 	  blockMap: null,
 	  selectionBefore: null,
 	  selectionAfter: null
@@ -28192,6 +27931,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    return _possibleConstructorReturn(this, _ContentStateRecord.apply(this, arguments));
 	  }
+
+	  ContentState.prototype.getEntityMap = function getEntityMap() {
+	    // TODO: update this when we fully remove DraftEntity
+	    return DraftEntity;
+	  };
 
 	  ContentState.prototype.getBlockMap = function getBlockMap() {
 	    return this.get('blockMap');
@@ -28252,16 +27996,55 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }).join(delimiter || '\n');
 	  };
 
+	  ContentState.prototype.getLastCreatedEntityKey = function getLastCreatedEntityKey() {
+	    // TODO: update this when we fully remove DraftEntity
+	    return DraftEntity.__getLastCreatedEntityKey();
+	  };
+
 	  ContentState.prototype.hasText = function hasText() {
 	    var blockMap = this.getBlockMap();
 	    return blockMap.size > 1 || blockMap.first().getLength() > 0;
 	  };
 
-	  ContentState.createFromBlockArray = function createFromBlockArray(blocks) {
-	    var blockMap = BlockMapBuilder.createFromArray(blocks);
-	    var selectionState = SelectionState.createEmpty(blockMap.first().getKey());
+	  ContentState.prototype.createEntity = function createEntity(type, mutability, data) {
+	    // TODO: update this when we fully remove DraftEntity
+	    DraftEntity.__create(type, mutability, data);
+	    return this;
+	  };
+
+	  ContentState.prototype.mergeEntityData = function mergeEntityData(key, toMerge) {
+	    // TODO: update this when we fully remove DraftEntity
+	    DraftEntity.__mergeData(key, toMerge);
+	    return this;
+	  };
+
+	  ContentState.prototype.replaceEntityData = function replaceEntityData(key, newData) {
+	    // TODO: update this when we fully remove DraftEntity
+	    DraftEntity.__replaceData(key, newData);
+	    return this;
+	  };
+
+	  ContentState.prototype.addEntity = function addEntity(instance) {
+	    // TODO: update this when we fully remove DraftEntity
+	    DraftEntity.__add(instance);
+	    return this;
+	  };
+
+	  ContentState.prototype.getEntity = function getEntity(key) {
+	    // TODO: update this when we fully remove DraftEntity
+	    return DraftEntity.__get(key);
+	  };
+
+	  ContentState.createFromBlockArray = function createFromBlockArray(
+	  // TODO: update flow type when we completely deprecate the old entity API
+	  blocks, entityMap) {
+	    // TODO: remove this when we completely deprecate the old entity API
+	    var theBlocks = Array.isArray(blocks) ? blocks : blocks.contentBlocks;
+	    var blockMap = BlockMapBuilder.createFromArray(theBlocks);
+	    var selectionState = blockMap.isEmpty() ? new SelectionState() : SelectionState.createEmpty(blockMap.first().getKey());
 	    return new ContentState({
 	      blockMap: blockMap,
+	      entityMap: entityMap || DraftEntity,
 	      selectionBefore: selectionState,
 	      selectionAfter: selectionState
 	    });
@@ -28289,7 +28072,279 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = ContentState;
 
 /***/ },
-/* 283 */
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _assign = __webpack_require__(25);
+
+	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule DraftEntity
+	 * @typechecks
+	 * 
+	 */
+
+	var DraftEntityInstance = __webpack_require__(280);
+	var Immutable = __webpack_require__(185);
+
+	var invariant = __webpack_require__(29);
+
+	var Map = Immutable.Map;
+
+
+	var instances = Map();
+	var instanceKey = 0;
+
+	/**
+	 * Temporary utility for generating the warnings
+	 */
+	function logWarning(oldMethodCall, newMethodCall) {
+	  console.warn('WARNING: ' + oldMethodCall + ' will be deprecated soon!\nPlease use "' + newMethodCall + '" instead.');
+	}
+
+	/**
+	 * A "document entity" is an object containing metadata associated with a
+	 * piece of text in a ContentBlock.
+	 *
+	 * For example, a `link` entity might include a `uri` property. When a
+	 * ContentBlock is rendered in the browser, text that refers to that link
+	 * entity may be rendered as an anchor, with the `uri` as the href value.
+	 *
+	 * In a ContentBlock, every position in the text may correspond to zero
+	 * or one entities. This correspondence is tracked using a key string,
+	 * generated via DraftEntity.create() and used to obtain entity metadata
+	 * via DraftEntity.get().
+	 */
+	var DraftEntity = {
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.getLastCreatedEntityKey' instead.
+	   * ---
+	   * Get the random key string from whatever entity was last created.
+	   * We need this to support the new API, as part of transitioning to put Entity
+	   * storage in contentState.
+	   */
+	  getLastCreatedEntityKey: function getLastCreatedEntityKey() {
+	    logWarning('DraftEntity.getLastCreatedEntityKey', 'contentState.getLastCreatedEntityKey');
+	    return DraftEntity.__getLastCreatedEntityKey();
+	  },
+
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.createEntity' instead.
+	   * ---
+	   * Create a DraftEntityInstance and store it for later retrieval.
+	   *
+	   * A random key string will be generated and returned. This key may
+	   * be used to track the entity's usage in a ContentBlock, and for
+	   * retrieving data about the entity at render time.
+	   */
+	  create: function create(type, mutability, data) {
+	    logWarning('DraftEntity.create', 'contentState.createEntity');
+	    return DraftEntity.__create(type, mutability, data);
+	  },
+
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.addEntity' instead.
+	   * ---
+	   * Add an existing DraftEntityInstance to the DraftEntity map. This is
+	   * useful when restoring instances from the server.
+	   */
+	  add: function add(instance) {
+	    logWarning('DraftEntity.add', 'contentState.addEntity');
+	    return DraftEntity.__add(instance);
+	  },
+
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.getEntity' instead.
+	   * ---
+	   * Retrieve the entity corresponding to the supplied key string.
+	   */
+	  get: function get(key) {
+	    logWarning('DraftEntity.get', 'contentState.getEntity');
+	    return DraftEntity.__get(key);
+	  },
+
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.mergeEntityData' instead.
+	   * ---
+	   * Entity instances are immutable. If you need to update the data for an
+	   * instance, this method will merge your data updates and return a new
+	   * instance.
+	   */
+	  mergeData: function mergeData(key, toMerge) {
+	    logWarning('DraftEntity.mergeData', 'contentState.mergeEntityData');
+	    return DraftEntity.__mergeData(key, toMerge);
+	  },
+
+	  /**
+	   * WARNING: This method will be deprecated soon!
+	   * Please use 'contentState.replaceEntityData' instead.
+	   * ---
+	   * Completely replace the data for a given instance.
+	   */
+	  replaceData: function replaceData(key, newData) {
+	    logWarning('DraftEntity.replaceData', 'contentState.replaceEntityData');
+	    return DraftEntity.__replaceData(key, newData);
+	  },
+
+	  // ***********************************WARNING******************************
+	  // --- the above public API will be deprecated in the next version of Draft!
+	  // The methods below this line are private - don't call them directly.
+
+	  /**
+	   * Get the random key string from whatever entity was last created.
+	   * We need this to support the new API, as part of transitioning to put Entity
+	   * storage in contentState.
+	   */
+	  __getLastCreatedEntityKey: function __getLastCreatedEntityKey() {
+	    return '' + instanceKey;
+	  },
+
+	  /**
+	   * Create a DraftEntityInstance and store it for later retrieval.
+	   *
+	   * A random key string will be generated and returned. This key may
+	   * be used to track the entity's usage in a ContentBlock, and for
+	   * retrieving data about the entity at render time.
+	   */
+	  __create: function __create(type, mutability, data) {
+	    return DraftEntity.__add(new DraftEntityInstance({ type: type, mutability: mutability, data: data || {} }));
+	  },
+
+	  /**
+	   * Add an existing DraftEntityInstance to the DraftEntity map. This is
+	   * useful when restoring instances from the server.
+	   */
+	  __add: function __add(instance) {
+	    var key = '' + ++instanceKey;
+	    instances = instances.set(key, instance);
+	    return key;
+	  },
+
+	  /**
+	   * Retrieve the entity corresponding to the supplied key string.
+	   */
+	  __get: function __get(key) {
+	    var instance = instances.get(key);
+	    !!!instance ?  false ? invariant(false, 'Unknown DraftEntity key.') : invariant(false) : void 0;
+	    return instance;
+	  },
+
+	  /**
+	   * Entity instances are immutable. If you need to update the data for an
+	   * instance, this method will merge your data updates and return a new
+	   * instance.
+	   */
+	  __mergeData: function __mergeData(key, toMerge) {
+	    var instance = DraftEntity.__get(key);
+	    var newData = _extends({}, instance.getData(), toMerge);
+	    var newInstance = instance.set('data', newData);
+	    instances = instances.set(key, newInstance);
+	    return newInstance;
+	  },
+
+	  /**
+	   * Completely replace the data for a given instance.
+	   */
+	  __replaceData: function __replaceData(key, newData) {
+	    var instance = DraftEntity.__get(key);
+	    var newInstance = instance.set('data', newData);
+	    instances = instances.set(key, newInstance);
+	    return newInstance;
+	  }
+	};
+
+	module.exports = DraftEntity;
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule DraftEntityInstance
+	 * 
+	 */
+
+	'use strict';
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Immutable = __webpack_require__(185);
+
+	var Record = Immutable.Record;
+
+
+	var DraftEntityInstanceRecord = Record({
+	  type: 'TOKEN',
+	  mutability: 'IMMUTABLE',
+	  data: Object
+	});
+
+	/**
+	 * An instance of a document entity, consisting of a `type` and relevant
+	 * `data`, metadata about the entity.
+	 *
+	 * For instance, a "link" entity might provide a URI, and a "mention"
+	 * entity might provide the mentioned user's ID. These pieces of data
+	 * may be used when rendering the entity as part of a ContentBlock DOM
+	 * representation. For a link, the data would be used as an href for
+	 * the rendered anchor. For a mention, the ID could be used to retrieve
+	 * a hovercard.
+	 */
+
+	var DraftEntityInstance = function (_DraftEntityInstanceR) {
+	  _inherits(DraftEntityInstance, _DraftEntityInstanceR);
+
+	  function DraftEntityInstance() {
+	    _classCallCheck(this, DraftEntityInstance);
+
+	    return _possibleConstructorReturn(this, _DraftEntityInstanceR.apply(this, arguments));
+	  }
+
+	  DraftEntityInstance.prototype.getType = function getType() {
+	    return this.get('type');
+	  };
+
+	  DraftEntityInstance.prototype.getMutability = function getMutability() {
+	    return this.get('mutability');
+	  };
+
+	  DraftEntityInstance.prototype.getData = function getData() {
+	    return this.get('data');
+	  };
+
+	  return DraftEntityInstance;
+	}(DraftEntityInstanceRecord);
+
+	module.exports = DraftEntityInstance;
+
+/***/ },
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28313,7 +28368,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	var Record = Immutable.Record;
 
@@ -28428,7 +28483,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = SelectionState;
 
 /***/ },
-/* 284 */
+/* 282 */
 /***/ function(module, exports) {
 
 	/**
@@ -28454,7 +28509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = sanitizeDraftText;
 
 /***/ },
-/* 285 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28472,10 +28527,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var Immutable = __webpack_require__(257);
-	var UnicodeBidiService = __webpack_require__(286);
+	var Immutable = __webpack_require__(185);
+	var UnicodeBidiService = __webpack_require__(284);
 
-	var nullthrows = __webpack_require__(289);
+	var nullthrows = __webpack_require__(287);
 
 	var OrderedMap = Immutable.OrderedMap;
 
@@ -28507,7 +28562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = EditorBidiService;
 
 /***/ },
-/* 286 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28556,8 +28611,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var UnicodeBidi = __webpack_require__(287);
-	var UnicodeBidiDirection = __webpack_require__(288);
+	var UnicodeBidi = __webpack_require__(285);
+	var UnicodeBidiDirection = __webpack_require__(286);
 
 	var invariant = __webpack_require__(29);
 
@@ -28612,7 +28667,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = UnicodeBidiService;
 
 /***/ },
-/* 287 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28637,7 +28692,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UnicodeBidiDirection = __webpack_require__(288);
+	var UnicodeBidiDirection = __webpack_require__(286);
 
 	var invariant = __webpack_require__(29);
 
@@ -28773,7 +28828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = UnicodeBidi;
 
 /***/ },
-/* 288 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28886,7 +28941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = UnicodeBidiDirection;
 
 /***/ },
-/* 289 */
+/* 287 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28912,7 +28967,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = nullthrows;
 
 /***/ },
-/* 290 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28932,7 +28987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Immutable = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	var List = Immutable.List;
 
@@ -28969,13 +29024,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this._decorators = decorators.slice();
 	  }
 
-	  CompositeDraftDecorator.prototype.getDecorations = function getDecorations(block) {
+	  CompositeDraftDecorator.prototype.getDecorations = function getDecorations(block, contentState) {
 	    var decorations = Array(block.getText().length).fill(null);
 
 	    this._decorators.forEach(function ( /*object*/decorator, /*number*/ii) {
 	      var counter = 0;
 	      var strategy = decorator.strategy;
-	      strategy(block, function ( /*number*/start, /*number*/end) {
+	      var callback = function callback( /*number*/start, /*number*/end) {
 	        // Find out if any of our matching range is already occupied
 	        // by another decorator. If so, discard the match. Otherwise, store
 	        // the component key for rendering.
@@ -28983,7 +29038,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          occupySlice(decorations, start, end, ii + DELIMITER + counter);
 	          counter++;
 	        }
-	      });
+	      };
+	      strategy(block, callback, contentState);
 	    });
 
 	    return List(decorations);
@@ -29030,7 +29086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = CompositeDraftDecorator;
 
 /***/ },
-/* 291 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29047,19 +29103,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _require = __webpack_require__(257);
+	var _require = __webpack_require__(185);
 
 	var Map = _require.Map;
 
 	var React = __webpack_require__(23);
 
-	var cx = __webpack_require__(292);
+	var cx = __webpack_require__(290);
 
 	var UL_WRAP = React.createElement('ul', { className: cx('public/DraftStyleDefault/ul') });
 	var OL_WRAP = React.createElement('ol', { className: cx('public/DraftStyleDefault/ol') });
 	var PRE_WRAP = React.createElement('pre', { className: cx('public/DraftStyleDefault/pre') });
 
-	module.exports = Map({
+	var DefaultDraftBlockRenderMap = Map({
 	  'header-one': {
 	    element: 'h1'
 	  },
@@ -29097,12 +29153,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    wrapper: PRE_WRAP
 	  },
 	  'unstyled': {
-	    element: 'div'
+	    element: 'div',
+	    aliasedElements: ['p']
 	  }
 	});
 
+	module.exports = DefaultDraftBlockRenderMap;
+
 /***/ },
-/* 292 */
+/* 290 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29148,7 +29207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = cx;
 
 /***/ },
-/* 293 */
+/* 291 */
 /***/ function(module, exports) {
 
 	/**
@@ -29189,7 +29248,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 294 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29203,11 +29262,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @providesModule DraftEditor.react
 	 * @typechecks
 	 * 
+	 * @preventMunge
 	 */
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -29217,26 +29277,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DefaultDraftBlockRenderMap = __webpack_require__(291);
-	var DefaultDraftInlineStyle = __webpack_require__(293);
-	var DraftEditorCompositionHandler = __webpack_require__(295);
-	var DraftEditorContents = __webpack_require__(299);
-	var DraftEditorDragHandler = __webpack_require__(320);
-	var DraftEditorEditHandler = __webpack_require__(328);
+	var DefaultDraftBlockRenderMap = __webpack_require__(289);
+	var DefaultDraftInlineStyle = __webpack_require__(291);
+	var DraftEditorCompositionHandler = __webpack_require__(293);
+	var DraftEditorContents = __webpack_require__(297);
+	var DraftEditorDragHandler = __webpack_require__(318);
+	var DraftEditorEditHandler = __webpack_require__(326);
 	var DraftEditorPlaceholder = __webpack_require__(369);
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 	var React = __webpack_require__(23);
 	var ReactDOM = __webpack_require__(52);
-	var Scroll = __webpack_require__(311);
-	var Style = __webpack_require__(312);
-	var UserAgent = __webpack_require__(303);
+	var Scroll = __webpack_require__(309);
+	var Style = __webpack_require__(310);
+	var UserAgent = __webpack_require__(301);
 
-	var cx = __webpack_require__(292);
+	var cx = __webpack_require__(290);
 	var emptyFunction = __webpack_require__(33);
-	var generateRandomKey = __webpack_require__(272);
+	var generateRandomKey = __webpack_require__(268);
 	var getDefaultKeyBinding = __webpack_require__(370);
-	var nullthrows = __webpack_require__(289);
-	var getScrollPosition = __webpack_require__(316);
+	var nullthrows = __webpack_require__(287);
+	var getScrollPosition = __webpack_require__(314);
 
 	var isIE = UserAgent.isBrowser('IE');
 
@@ -29269,11 +29329,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _this._blockSelectEvents = false;
 	    _this._clipboard = null;
-	    _this._guardAgainstRender = false;
 	    _this._handler = null;
 	    _this._dragCount = 0;
 	    _this._editorKey = generateRandomKey();
 	    _this._placeholderAccessibilityID = 'placeholder-' + _this._editorKey;
+	    _this._latestEditorState = props.editorState;
 
 	    _this._onBeforeInput = _this._buildHandler('onBeforeInput');
 	    _this._onBlur = _this._buildHandler('onBlur');
@@ -29302,8 +29362,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.setMode = _this._setMode.bind(_this);
 	    _this.exitCurrentMode = _this._exitCurrentMode.bind(_this);
 	    _this.restoreEditorDOM = _this._restoreEditorDOM.bind(_this);
-	    _this.setRenderGuard = _this._setRenderGuard.bind(_this);
-	    _this.removeRenderGuard = _this._removeRenderGuard.bind(_this);
 	    _this.setClipboard = _this._setClipboard.bind(_this);
 	    _this.getClipboard = _this._getClipboard.bind(_this);
 	    _this.getEditorKey = function () {
@@ -29336,7 +29394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return function (e) {
 	      if (!_this2.props.readOnly) {
 	        var method = _this2._handler && _this2._handler[eventName];
-	        method && method.call(_this2, e);
+	        method && method(_this2, e);
 	      }
 	    };
 	  };
@@ -29462,8 +29520,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 
 
-	  DraftEditor.prototype.componentWillUpdate = function componentWillUpdate() {
+	  DraftEditor.prototype.componentWillUpdate = function componentWillUpdate(nextProps) {
 	    this._blockSelectEvents = true;
+	    this._latestEditorState = nextProps.editorState;
 	  };
 
 	  DraftEditor.prototype.componentDidUpdate = function componentDidUpdate() {
@@ -29553,21 +29612,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  /**
-	   * Guard against rendering. Intended for use when we need to manually
-	   * reset editor contents, to ensure that no outside influences lead to
-	   * React reconciliation when we are in an uncertain state.
-	   */
-
-
-	  DraftEditor.prototype._setRenderGuard = function _setRenderGuard() {
-	    this._guardAgainstRender = true;
-	  };
-
-	  DraftEditor.prototype._removeRenderGuard = function _removeRenderGuard() {
-	    this._guardAgainstRender = false;
-	  };
-
-	  /**
 	   * Used via `this.setClipboard(...)`.
 	   *
 	   * Set the clipboard state for a cut/copy event.
@@ -29601,6 +29645,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  DraftEditor.prototype._update = function _update(editorState) {
+	    this._latestEditorState = editorState;
 	    this.props.onChange(editorState);
 	  };
 
@@ -29644,7 +29689,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditor;
 
 /***/ },
-/* 295 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29661,12 +29706,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
-	var Keys = __webpack_require__(296);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
+	var Keys = __webpack_require__(294);
 
-	var getEntityKeyForSelection = __webpack_require__(297);
-	var isSelectionAtLeafStart = __webpack_require__(298);
+	var getEntityKeyForSelection = __webpack_require__(295);
+	var isSelectionAtLeafStart = __webpack_require__(296);
 
 	/**
 	 * Millisecond delay to allow `compositionstart` to fire again upon
@@ -29691,7 +29736,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var textInputData = '';
 
 	var DraftEditorCompositionHandler = {
-	  onBeforeInput: function onBeforeInput(e) {
+	  onBeforeInput: function onBeforeInput(editor, e) {
 	    textInputData = (textInputData || '') + e.data;
 	  },
 
@@ -29699,7 +29744,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * A `compositionstart` event has fired while we're still in composition
 	   * mode. Continue the current composition session to prevent a re-render.
 	   */
-	  onCompositionStart: function onCompositionStart() {
+	  onCompositionStart: function onCompositionStart(editor) {
 	    stillComposing = true;
 	  },
 
@@ -29717,14 +29762,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * twice could break the DOM, we only use the first event. Example: Arabic
 	   * Google Input Tools on Windows 8.1 fires `compositionend` three times.
 	   */
-	  onCompositionEnd: function onCompositionEnd() {
-	    var _this = this;
-
+	  onCompositionEnd: function onCompositionEnd(editor) {
 	    resolved = false;
 	    stillComposing = false;
 	    setTimeout(function () {
 	      if (!resolved) {
-	        DraftEditorCompositionHandler.resolveComposition.call(_this);
+	        DraftEditorCompositionHandler.resolveComposition(editor);
 	      }
 	    }, RESOLVE_DELAY);
 	  },
@@ -29734,7 +29777,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * the arrow keys are used to commit, prevent default so that the cursor
 	   * doesn't move, otherwise it will jump back noticeably on re-render.
 	   */
-	  onKeyDown: function onKeyDown(e) {
+	  onKeyDown: function onKeyDown(editor, e) {
+	    if (!stillComposing) {
+	      // If a keydown event is received after compositionend but before the
+	      // 20ms timer expires (ex: type option-E then backspace, or type A then
+	      // backspace in 2-Set Korean), we should immediately resolve the
+	      // composition and reinterpret the key press in edit mode.
+	      DraftEditorCompositionHandler.resolveComposition(editor);
+	      editor._onKeyDown(e);
+	      return;
+	    }
 	    if (e.which === Keys.RIGHT || e.which === Keys.LEFT) {
 	      e.preventDefault();
 	    }
@@ -29746,7 +29798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * characters that we do not want. `preventDefault` allows the composition
 	   * to be committed while preventing the extra characters.
 	   */
-	  onKeyPress: function onKeyPress(e) {
+	  onKeyPress: function onKeyPress(editor, e) {
 	    if (e.which === Keys.RETURN) {
 	      e.preventDefault();
 	    }
@@ -29767,7 +29819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Resetting innerHTML will move focus to the beginning of the editor,
 	   * so we update to force it back to the correct place.
 	   */
-	  resolveComposition: function resolveComposition() {
+	  resolveComposition: function resolveComposition(editor) {
 	    if (stillComposing) {
 	      return;
 	    }
@@ -29776,7 +29828,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var composedChars = textInputData;
 	    textInputData = '';
 
-	    var editorState = EditorState.set(this.props.editorState, {
+	    var editorState = EditorState.set(editor._latestEditorState, {
 	      inCompositionMode: false
 	    });
 
@@ -29786,22 +29838,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var mustReset = !composedChars || isSelectionAtLeafStart(editorState) || currentStyle.size > 0 || entityKey !== null;
 
 	    if (mustReset) {
-	      this.restoreEditorDOM();
+	      editor.restoreEditorDOM();
 	    }
 
-	    this.exitCurrentMode();
-	    this.removeRenderGuard();
+	    editor.exitCurrentMode();
 
 	    if (composedChars) {
 	      // If characters have been composed, re-rendering with the update
 	      // is sufficient to reset the editor.
 	      var contentState = DraftModifier.replaceText(editorState.getCurrentContent(), editorState.getSelection(), composedChars, currentStyle, entityKey);
-	      this.update(EditorState.push(editorState, contentState, 'insert-characters'));
+	      editor.update(EditorState.push(editorState, contentState, 'insert-characters'));
 	      return;
 	    }
 
 	    if (mustReset) {
-	      this.update(EditorState.set(editorState, {
+	      editor.update(EditorState.set(editorState, {
 	        nativelyRenderedContent: null,
 	        forceSelection: true
 	      }));
@@ -29812,7 +29863,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorCompositionHandler;
 
 /***/ },
-/* 296 */
+/* 294 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29853,8 +29904,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
+/* 295 */
+/***/ function(module, exports) {
 
 	/**
 	 * Copyright (c) 2013-present, Facebook, Inc.
@@ -29871,8 +29922,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftEntity = __webpack_require__(266);
-
 	/**
 	 * Return the entity key that should be used when inserting text for the
 	 * specified target selection, only if the entity is `MUTABLE`. `IMMUTABLE`
@@ -29886,7 +29935,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var offset = targetSelection.getAnchorOffset();
 	    if (offset > 0) {
 	      entityKey = contentState.getBlockForKey(key).getEntityAt(offset - 1);
-	      return filterKey(entityKey);
+	      return filterKey(contentState.getEntityMap(), entityKey);
 	    }
 	    return null;
 	  }
@@ -29897,16 +29946,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  entityKey = startOffset === startBlock.getLength() ? null : startBlock.getEntityAt(startOffset);
 
-	  return filterKey(entityKey);
+	  return filterKey(contentState.getEntityMap(), entityKey);
 	}
 
 	/**
 	 * Determine whether an entity key corresponds to a `MUTABLE` entity. If so,
 	 * return it. If not, return null.
 	 */
-	function filterKey(entityKey) {
+	function filterKey(entityMap, entityKey) {
 	  if (entityKey) {
-	    var entity = DraftEntity.get(entityKey);
+	    var entity = entityMap.__get(entityKey);
 	    return entity.getMutability() === 'MUTABLE' ? entityKey : null;
 	  }
 	  return null;
@@ -29915,7 +29964,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getEntityKeyForSelection;
 
 /***/ },
-/* 298 */
+/* 296 */
 /***/ function(module, exports) {
 
 	/**
@@ -29968,7 +30017,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isSelectionAtLeafStart;
 
 /***/ },
-/* 299 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29986,7 +30035,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -29996,14 +30045,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DraftEditorBlock = __webpack_require__(300);
-	var DraftOffsetKey = __webpack_require__(310);
-	var EditorState = __webpack_require__(280);
+	var DraftEditorBlock = __webpack_require__(298);
+	var DraftOffsetKey = __webpack_require__(308);
+	var EditorState = __webpack_require__(276);
 	var React = __webpack_require__(23);
 
-	var cx = __webpack_require__(292);
-	var joinClasses = __webpack_require__(319);
-	var nullthrows = __webpack_require__(289);
+	var cx = __webpack_require__(290);
+	var joinClasses = __webpack_require__(317);
+	var nullthrows = __webpack_require__(287);
 
 	/**
 	 * `DraftEditorContents` is the container component for all block components
@@ -30098,6 +30147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var direction = directionMap.get(key);
 	      var offsetKey = DraftOffsetKey.encode(key, 0, 0);
 	      var componentProps = {
+	        contentState: content,
 	        block: _block,
 	        blockProps: customProps,
 	        customStyleMap: customStyleMap,
@@ -30215,7 +30265,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorContents;
 
 /***/ },
-/* 300 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30233,7 +30283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -30243,22 +30293,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ContentBlock = __webpack_require__(259);
-	var DraftEditorLeaf = __webpack_require__(301);
-	var DraftOffsetKey = __webpack_require__(310);
+	var ContentBlock = __webpack_require__(258);
+	var ContentState = __webpack_require__(278);
+	var DraftEditorLeaf = __webpack_require__(299);
+	var DraftOffsetKey = __webpack_require__(308);
 	var React = __webpack_require__(23);
 	var ReactDOM = __webpack_require__(52);
-	var Scroll = __webpack_require__(311);
-	var SelectionState = __webpack_require__(283);
-	var Style = __webpack_require__(312);
-	var UnicodeBidi = __webpack_require__(287);
-	var UnicodeBidiDirection = __webpack_require__(288);
+	var Scroll = __webpack_require__(309);
+	var SelectionState = __webpack_require__(281);
+	var Style = __webpack_require__(310);
+	var UnicodeBidi = __webpack_require__(285);
+	var UnicodeBidiDirection = __webpack_require__(286);
 
-	var cx = __webpack_require__(292);
-	var getElementPosition = __webpack_require__(314);
-	var getScrollPosition = __webpack_require__(316);
-	var getViewportDimensions = __webpack_require__(318);
-	var nullthrows = __webpack_require__(289);
+	var cx = __webpack_require__(290);
+	var getElementPosition = __webpack_require__(312);
+	var getScrollPosition = __webpack_require__(314);
+	var getViewportDimensions = __webpack_require__(316);
+	var nullthrows = __webpack_require__(287);
 
 	var SCROLL_BUFFER = 10;
 
@@ -30383,6 +30434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return React.createElement(
 	        DecoratorComponent,
 	        _extends({}, decoratorProps, {
+	          contentState: _this2.props.contentState,
 	          decoratedText: decoratedText,
 	          dir: dir,
 	          key: decoratorOffsetKey,
@@ -30426,7 +30478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorBlock;
 
 /***/ },
-/* 301 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30444,7 +30496,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -30452,12 +30504,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var DraftEditorTextNode = __webpack_require__(302);
+	var DraftEditorTextNode = __webpack_require__(300);
 	var React = __webpack_require__(23);
 	var ReactDOM = __webpack_require__(52);
-	var SelectionState = __webpack_require__(283);
+	var SelectionState = __webpack_require__(281);
 
-	var setDraftEditorSelection = __webpack_require__(309);
+	var setDraftEditorSelection = __webpack_require__(307);
 
 	/**
 	 * All leaf nodes in the editor are spans with single text nodes. Leaf
@@ -30590,7 +30642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorLeaf;
 
 /***/ },
-/* 302 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30616,7 +30668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(23);
 	var ReactDOM = __webpack_require__(52);
-	var UserAgent = __webpack_require__(303);
+	var UserAgent = __webpack_require__(301);
 
 	// In IE, spans with <br> tags render as two newlines. By rendering a span
 	// with only a newline character, we can be sure to render a single line.
@@ -30703,7 +30755,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorTextNode;
 
 /***/ },
-/* 303 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30718,10 +30770,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgentData = __webpack_require__(304);
-	var VersionRange = __webpack_require__(307);
+	var UserAgentData = __webpack_require__(302);
+	var VersionRange = __webpack_require__(305);
 
-	var mapObject = __webpack_require__(308);
+	var mapObject = __webpack_require__(306);
 	var memoizeStringOnly = __webpack_require__(116);
 
 	/**
@@ -30949,7 +31001,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = mapObject(UserAgent, memoizeStringOnly);
 
 /***/ },
-/* 304 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30975,7 +31027,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UAParser = __webpack_require__(305);
+	var UAParser = __webpack_require__(303);
 
 	var UNKNOWN = 'Unknown';
 
@@ -31036,7 +31088,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = uaData;
 
 /***/ },
-/* 305 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31922,7 +31974,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        exports.UAParser = UAParser;
 	    } else {
 	        // requirejs env (optional)
-	        if ("function" === FUNC_TYPE && __webpack_require__(306)) {
+	        if ("function" === FUNC_TYPE && __webpack_require__(304)) {
 	            !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
 	                return UAParser;
 	            }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -31957,7 +32009,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 306 */
+/* 304 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -31965,7 +32017,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 307 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32352,7 +32404,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = VersionRange;
 
 /***/ },
-/* 308 */
+/* 306 */
 /***/ function(module, exports) {
 
 	/**
@@ -32407,7 +32459,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = mapObject;
 
 /***/ },
-/* 309 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -32546,7 +32598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 310 */
+/* 308 */
 /***/ function(module, exports) {
 
 	/**
@@ -32588,7 +32640,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftOffsetKey;
 
 /***/ },
-/* 311 */
+/* 309 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32678,7 +32730,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Scroll;
 
 /***/ },
-/* 312 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32694,7 +32746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	var getStyleProperty = __webpack_require__(313);
+	var getStyleProperty = __webpack_require__(311);
 
 	/**
 	 * @param {DOMNode} element [description]
@@ -32746,7 +32798,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = Style;
 
 /***/ },
-/* 313 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32804,7 +32856,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getStyleProperty;
 
 /***/ },
-/* 314 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32820,7 +32872,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	var getElementRect = __webpack_require__(315);
+	var getElementRect = __webpack_require__(313);
 
 	/**
 	 * Gets an element's position in pixels relative to the viewport. The returned
@@ -32842,7 +32894,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getElementPosition;
 
 /***/ },
-/* 315 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32897,7 +32949,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getElementRect;
 
 /***/ },
-/* 316 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32913,7 +32965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getDocumentScrollElement = __webpack_require__(317);
+	var getDocumentScrollElement = __webpack_require__(315);
 	var getUnboundedScrollPosition = __webpack_require__(154);
 
 	/**
@@ -32949,7 +33001,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getScrollPosition;
 
 /***/ },
-/* 317 */
+/* 315 */
 /***/ function(module, exports) {
 
 	/**
@@ -32984,7 +33036,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getDocumentScrollElement;
 
 /***/ },
-/* 318 */
+/* 316 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -33048,7 +33100,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getViewportDimensions;
 
 /***/ },
-/* 319 */
+/* 317 */
 /***/ function(module, exports) {
 
 	/**
@@ -33092,7 +33144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = joinClasses;
 
 /***/ },
-/* 320 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33110,16 +33162,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DataTransfer = __webpack_require__(321);
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
+	var DataTransfer = __webpack_require__(319);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
 
-	var findAncestorOffsetKey = __webpack_require__(323);
-	var getTextContentFromFiles = __webpack_require__(325);
-	var getUpdatedSelectionState = __webpack_require__(326);
-	var nullthrows = __webpack_require__(289);
+	var findAncestorOffsetKey = __webpack_require__(321);
+	var getTextContentFromFiles = __webpack_require__(323);
+	var getUpdatedSelectionState = __webpack_require__(324);
+	var nullthrows = __webpack_require__(287);
 
-	var isEventHandled = __webpack_require__(327);
+	var isEventHandled = __webpack_require__(325);
 
 	/**
 	 * Get a SelectionState for the supplied mouse event.
@@ -33150,23 +33202,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Drag originating from input terminated.
 	   */
-	  onDragEnd: function onDragEnd() {
-	    this.exitCurrentMode();
+	  onDragEnd: function onDragEnd(editor) {
+	    editor.exitCurrentMode();
 	  },
 
 	  /**
 	   * Handle data being dropped.
 	   */
-	  onDrop: function onDrop(e) {
-	    var _this = this;
-
+	  onDrop: function onDrop(editor, e) {
 	    var data = new DataTransfer(e.nativeEvent.dataTransfer);
 
-	    var editorState = this.props.editorState;
+	    var editorState = editor._latestEditorState;
 	    var dropSelection = getSelectionForEvent(e.nativeEvent, editorState);
 
 	    e.preventDefault();
-	    this.exitCurrentMode();
+	    editor.exitCurrentMode();
 
 	    if (dropSelection == null) {
 	      return;
@@ -33174,28 +33224,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var files = data.getFiles();
 	    if (files.length > 0) {
-	      if (this.props.handleDroppedFiles && isEventHandled(this.props.handleDroppedFiles(dropSelection, files))) {
+	      if (editor.props.handleDroppedFiles && isEventHandled(editor.props.handleDroppedFiles(dropSelection, files))) {
 	        return;
 	      }
 
 	      getTextContentFromFiles(files, function (fileText) {
-	        fileText && _this.update(insertTextAtSelection(editorState, nullthrows(dropSelection), // flow wtf
+	        fileText && editor.update(insertTextAtSelection(editorState, nullthrows(dropSelection), // flow wtf
 	        fileText));
 	      });
 	      return;
 	    }
 
-	    var dragType = this._internalDrag ? 'internal' : 'external';
-	    if (this.props.handleDrop && isEventHandled(this.props.handleDrop(dropSelection, data, dragType))) {
+	    var dragType = editor._internalDrag ? 'internal' : 'external';
+	    if (editor.props.handleDrop && isEventHandled(editor.props.handleDrop(dropSelection, data, dragType))) {
 	      return;
 	    }
 
-	    if (this._internalDrag) {
-	      this.update(moveText(editorState, dropSelection));
+	    if (editor._internalDrag) {
+	      editor.update(moveText(editorState, dropSelection));
 	      return;
 	    }
 
-	    this.update(insertTextAtSelection(editorState, dropSelection, data.getText()));
+	    editor.update(insertTextAtSelection(editorState, dropSelection, data.getText()));
 	  }
 
 	};
@@ -33216,7 +33266,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorDragHandler;
 
 /***/ },
-/* 321 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33234,7 +33284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @typechecks
 	 */
 
-	var PhotosMimeType = __webpack_require__(322);
+	var PhotosMimeType = __webpack_require__(320);
 
 	var createArrayFromMixed = __webpack_require__(102);
 	var emptyFunction = __webpack_require__(33);
@@ -33442,7 +33492,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DataTransfer;
 
 /***/ },
-/* 322 */
+/* 320 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -33475,7 +33525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = PhotosMimeType;
 
 /***/ },
-/* 323 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33493,7 +33543,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getSelectionOffsetKeyForNode = __webpack_require__(324);
+	var getSelectionOffsetKeyForNode = __webpack_require__(322);
 
 	/**
 	 * Get the key from the node's nearest offset-aware ancestor.
@@ -33513,7 +33563,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = findAncestorOffsetKey;
 
 /***/ },
-/* 324 */
+/* 322 */
 /***/ function(module, exports) {
 
 	/**
@@ -33555,7 +33605,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getSelectionOffsetKeyForNode;
 
 /***/ },
-/* 325 */
+/* 323 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -33636,7 +33686,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 326 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33653,9 +33703,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftOffsetKey = __webpack_require__(310);
+	var DraftOffsetKey = __webpack_require__(308);
 
-	var nullthrows = __webpack_require__(289);
+	var nullthrows = __webpack_require__(287);
 
 	function getUpdatedSelectionState(editorState, anchorKey, anchorOffset, focusKey, focusOffset) {
 	  var selection = nullthrows(editorState.getSelection());
@@ -33716,7 +33766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = getUpdatedSelectionState;
 
 /***/ },
-/* 327 */
+/* 325 */
 /***/ function(module, exports) {
 
 	/**
@@ -33745,7 +33795,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = isEventHandled;
 
 /***/ },
-/* 328 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33762,7 +33812,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var onBeforeInput = __webpack_require__(329);
+	var onBeforeInput = __webpack_require__(327);
 	var onBlur = __webpack_require__(330);
 	var onCompositionStart = __webpack_require__(331);
 	var onCopy = __webpack_require__(332);
@@ -33793,7 +33843,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = DraftEditorEditHandler;
 
 /***/ },
-/* 329 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33810,16 +33860,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var BlockTree = __webpack_require__(281);
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
-	var UserAgent = __webpack_require__(303);
+	var BlockTree = __webpack_require__(277);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
+	var UserAgent = __webpack_require__(301);
 
-	var getEntityKeyForSelection = __webpack_require__(297);
-	var isSelectionAtLeafStart = __webpack_require__(298);
-	var nullthrows = __webpack_require__(289);
+	var getEntityKeyForSelection = __webpack_require__(295);
+	var isSelectionAtLeafStart = __webpack_require__(296);
+	var nullthrows = __webpack_require__(287);
+	var setImmediate = __webpack_require__(328);
 
-	var isEventHandled = __webpack_require__(327);
+	var isEventHandled = __webpack_require__(325);
 
 	// When nothing is focused, Firefox regards two characters, `'` and `/`, as
 	// commands that should open and focus the "quickfind" search bar. This should
@@ -33854,7 +33905,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * preserve spellcheck highlighting, which disappears or flashes if re-render
 	 * occurs on the relevant text nodes.
 	 */
-	function editOnBeforeInput(e) {
+	function editOnBeforeInput(editor, e) {
+	  if (editor._pendingStateFromBeforeInput !== undefined) {
+	    editor.update(editor._pendingStateFromBeforeInput);
+	    editor._pendingStateFromBeforeInput = undefined;
+	  }
+
 	  var chars = e.data;
 
 	  // In some cases (ex: IE ideographic space insertion) no character data
@@ -33868,7 +33924,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Simple examples: replacing a raw text ':)' with a smile emoji or image
 	  // decorator, or setting a block to be a list item after typing '- ' at the
 	  // start of the block.
-	  if (this.props.handleBeforeInput && isEventHandled(this.props.handleBeforeInput(chars))) {
+	  if (editor.props.handleBeforeInput && isEventHandled(editor.props.handleBeforeInput(chars))) {
 	    e.preventDefault();
 	    return;
 	  }
@@ -33876,12 +33932,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // If selection is collapsed, conditionally allow native behavior. This
 	  // reduces re-renders and preserves spellcheck highlighting. If the selection
 	  // is not collapsed, we will re-render.
-	  var editorState = this.props.editorState;
+	  var editorState = editor._latestEditorState;
 	  var selection = editorState.getSelection();
 
 	  if (!selection.isCollapsed()) {
 	    e.preventDefault();
-	    this.update(replaceText(editorState, chars, editorState.getCurrentInlineStyle(), getEntityKeyForSelection(editorState.getCurrentContent(), editorState.getSelection())));
+	    editor.update(replaceText(editorState, chars, editorState.getCurrentInlineStyle(), getEntityKeyForSelection(editorState.getCurrentContent(), editorState.getSelection())));
 	    return;
 	  }
 
@@ -33890,7 +33946,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (!mayAllowNative) {
 	    e.preventDefault();
-	    this.update(newEditorState);
+	    editor.update(newEditorState);
 	    return;
 	  }
 
@@ -33905,17 +33961,242 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (mustPreventDefaultForCharacter(chars) || originalFingerprint !== newFingerprint || nullthrows(newEditorState.getDirectionMap()).get(anchorKey) !== nullthrows(editorState.getDirectionMap()).get(anchorKey)) {
 	    e.preventDefault();
+	    editor.update(newEditorState);
 	  } else {
-	    // The native event is allowed to occur.
 	    newEditorState = EditorState.set(newEditorState, {
 	      nativelyRenderedContent: newEditorState.getCurrentContent()
 	    });
+	    // The native event is allowed to occur. To allow user onChange handlers to
+	    // change the inserted text, we wait until the text is actually inserted
+	    // before we actually update our state. That way when we rerender, the text
+	    // we see in the DOM will already have been inserted properly.
+	    editor._pendingStateFromBeforeInput = newEditorState;
+	    setImmediate(function () {
+	      if (editor._pendingStateFromBeforeInput !== undefined) {
+	        editor.update(editor._pendingStateFromBeforeInput);
+	        editor._pendingStateFromBeforeInput = undefined;
+	      }
+	    });
 	  }
-
-	  this.update(newEditorState);
 	}
 
 	module.exports = editOnBeforeInput;
+
+/***/ },
+/* 328 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+
+	'use strict';
+
+	// setimmediate adds setImmediate to the global. We want to make sure we export
+	// the actual function.
+
+	__webpack_require__(329);
+	module.exports = global.setImmediate;
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 329 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+	    "use strict";
+
+	    if (global.setImmediate) {
+	        return;
+	    }
+
+	    var nextHandle = 1; // Spec says greater than zero
+	    var tasksByHandle = {};
+	    var currentlyRunningATask = false;
+	    var doc = global.document;
+	    var registerImmediate;
+
+	    function setImmediate(callback) {
+	      // Callback can either be a function or a string
+	      if (typeof callback !== "function") {
+	        callback = new Function("" + callback);
+	      }
+	      // Copy function arguments
+	      var args = new Array(arguments.length - 1);
+	      for (var i = 0; i < args.length; i++) {
+	          args[i] = arguments[i + 1];
+	      }
+	      // Store and register the task
+	      var task = { callback: callback, args: args };
+	      tasksByHandle[nextHandle] = task;
+	      registerImmediate(nextHandle);
+	      return nextHandle++;
+	    }
+
+	    function clearImmediate(handle) {
+	        delete tasksByHandle[handle];
+	    }
+
+	    function run(task) {
+	        var callback = task.callback;
+	        var args = task.args;
+	        switch (args.length) {
+	        case 0:
+	            callback();
+	            break;
+	        case 1:
+	            callback(args[0]);
+	            break;
+	        case 2:
+	            callback(args[0], args[1]);
+	            break;
+	        case 3:
+	            callback(args[0], args[1], args[2]);
+	            break;
+	        default:
+	            callback.apply(undefined, args);
+	            break;
+	        }
+	    }
+
+	    function runIfPresent(handle) {
+	        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+	        // So if we're currently running a task, we'll need to delay this invocation.
+	        if (currentlyRunningATask) {
+	            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+	            // "too much recursion" error.
+	            setTimeout(runIfPresent, 0, handle);
+	        } else {
+	            var task = tasksByHandle[handle];
+	            if (task) {
+	                currentlyRunningATask = true;
+	                try {
+	                    run(task);
+	                } finally {
+	                    clearImmediate(handle);
+	                    currentlyRunningATask = false;
+	                }
+	            }
+	        }
+	    }
+
+	    function installNextTickImplementation() {
+	        registerImmediate = function(handle) {
+	            process.nextTick(function () { runIfPresent(handle); });
+	        };
+	    }
+
+	    function canUsePostMessage() {
+	        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+	        // where `global.postMessage` means something completely different and can't be used for this purpose.
+	        if (global.postMessage && !global.importScripts) {
+	            var postMessageIsAsynchronous = true;
+	            var oldOnMessage = global.onmessage;
+	            global.onmessage = function() {
+	                postMessageIsAsynchronous = false;
+	            };
+	            global.postMessage("", "*");
+	            global.onmessage = oldOnMessage;
+	            return postMessageIsAsynchronous;
+	        }
+	    }
+
+	    function installPostMessageImplementation() {
+	        // Installs an event handler on `global` for the `message` event: see
+	        // * https://developer.mozilla.org/en/DOM/window.postMessage
+	        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+	        var messagePrefix = "setImmediate$" + Math.random() + "$";
+	        var onGlobalMessage = function(event) {
+	            if (event.source === global &&
+	                typeof event.data === "string" &&
+	                event.data.indexOf(messagePrefix) === 0) {
+	                runIfPresent(+event.data.slice(messagePrefix.length));
+	            }
+	        };
+
+	        if (global.addEventListener) {
+	            global.addEventListener("message", onGlobalMessage, false);
+	        } else {
+	            global.attachEvent("onmessage", onGlobalMessage);
+	        }
+
+	        registerImmediate = function(handle) {
+	            global.postMessage(messagePrefix + handle, "*");
+	        };
+	    }
+
+	    function installMessageChannelImplementation() {
+	        var channel = new MessageChannel();
+	        channel.port1.onmessage = function(event) {
+	            var handle = event.data;
+	            runIfPresent(handle);
+	        };
+
+	        registerImmediate = function(handle) {
+	            channel.port2.postMessage(handle);
+	        };
+	    }
+
+	    function installReadyStateChangeImplementation() {
+	        var html = doc.documentElement;
+	        registerImmediate = function(handle) {
+	            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+	            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+	            var script = doc.createElement("script");
+	            script.onreadystatechange = function () {
+	                runIfPresent(handle);
+	                script.onreadystatechange = null;
+	                html.removeChild(script);
+	                script = null;
+	            };
+	            html.appendChild(script);
+	        };
+	    }
+
+	    function installSetTimeoutImplementation() {
+	        registerImmediate = function(handle) {
+	            setTimeout(runIfPresent, 0, handle);
+	        };
+	    }
+
+	    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+	    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+	    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+	    // Don't get fooled by e.g. browserify environments.
+	    if ({}.toString.call(global.process) === "[object process]") {
+	        // For Node.js before 0.9
+	        installNextTickImplementation();
+
+	    } else if (canUsePostMessage()) {
+	        // For non-IE10 modern browsers
+	        installPostMessageImplementation();
+
+	    } else if (global.MessageChannel) {
+	        // For web workers, where supported
+	        installMessageChannelImplementation();
+
+	    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+	        // For IE 6–8
+	        installReadyStateChangeImplementation();
+
+	    } else {
+	        // For older browsers
+	        installSetTimeoutImplementation();
+	    }
+
+	    attachTo.setImmediate = setImmediate;
+	    attachTo.clearImmediate = clearImmediate;
+	}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(133)))
 
 /***/ },
 /* 330 */
@@ -33935,14 +34216,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
-	var UserAgent = __webpack_require__(303);
+	var EditorState = __webpack_require__(276);
+	var UserAgent = __webpack_require__(301);
 
 	var getActiveElement = __webpack_require__(163);
 
 	var isWebKit = UserAgent.isEngine('WebKit');
 
-	function editOnBlur(e) {
+	function editOnBlur(editor, e) {
 	  // Webkit has a bug in which blurring a contenteditable by clicking on
 	  // other active elements will trigger the `blur` event but will not remove
 	  // the DOM selection from the contenteditable. We therefore force the
@@ -33953,15 +34234,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    global.getSelection().removeAllRanges();
 	  }
 
-	  var editorState = this.props.editorState;
+	  var editorState = editor._latestEditorState;
 	  var currentSelection = editorState.getSelection();
 	  if (!currentSelection.getHasFocus()) {
 	    return;
 	  }
 
 	  var selection = currentSelection.set('hasFocus', false);
-	  this.props.onBlur && this.props.onBlur(e);
-	  this.update(EditorState.acceptSelection(editorState, selection));
+	  editor.props.onBlur && editor.props.onBlur(e);
+	  editor.update(EditorState.acceptSelection(editorState, selection));
 	}
 
 	module.exports = editOnBlur;
@@ -33985,16 +34266,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	/**
 	 * The user has begun using an IME input system. Switching to `composite` mode
 	 * allows handling composition input and disables other edit behavior.
 	 */
-	function editOnCompositionStart() {
-	  this.setRenderGuard();
-	  this.setMode('composite');
-	  this.update(EditorState.set(this.props.editorState, { inCompositionMode: true }));
+	function editOnCompositionStart(editor, e) {
+	  editor.setMode('composite');
+	  editor.update(EditorState.set(editor._latestEditorState, { inCompositionMode: true }));
+	  // Allow composition handler to interpret the compositionstart event
+	  editor._onCompositionStart(e);
 	}
 
 	module.exports = editOnCompositionStart;
@@ -34024,8 +34306,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * it in our internal clipboard. Subsequent paste events will use this
 	 * fragment if no external clipboard data is supplied.
 	 */
-	function editOnCopy(e) {
-	  var editorState = this.props.editorState;
+	function editOnCopy(editor, e) {
+	  var editorState = editor._latestEditorState;
 	  var selection = editorState.getSelection();
 
 	  // No selection, so there's nothing to copy.
@@ -34034,7 +34316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return;
 	  }
 
-	  this.setClipboard(getFragmentFromSelection(this.props.editorState));
+	  editor.setClipboard(getFragmentFromSelection(editor._latestEditorState));
 	}
 
 	module.exports = editOnCopy;
@@ -34057,7 +34339,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var getContentStateFragment = __webpack_require__(271);
+	var getContentStateFragment = __webpack_require__(267);
 
 	function getFragmentFromSelection(editorState) {
 	  var selectionState = editorState.getSelection();
@@ -34089,12 +34371,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
-	var Style = __webpack_require__(312);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
+	var Style = __webpack_require__(310);
 
 	var getFragmentFromSelection = __webpack_require__(333);
-	var getScrollPosition = __webpack_require__(316);
+	var getScrollPosition = __webpack_require__(314);
 
 	/**
 	 * On `cut` events, native behavior is allowed to occur so that the system
@@ -34105,10 +34387,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * In addition, we can keep a copy of the removed fragment, including all
 	 * styles and entities, for use as an internal paste.
 	 */
-	function editOnCut(e) {
-	  var _this = this;
-
-	  var editorState = this.props.editorState;
+	function editOnCut(editor, e) {
+	  var editorState = editor._latestEditorState;
 	  var selection = editorState.getSelection();
 
 	  // No selection, so there's nothing to cut.
@@ -34128,18 +34408,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  var fragment = getFragmentFromSelection(editorState);
-	  this.setClipboard(fragment);
+	  editor.setClipboard(fragment);
 
 	  // Set `cut` mode to disable all event handling temporarily.
-	  this.setRenderGuard();
-	  this.setMode('cut');
+	  editor.setMode('cut');
 
 	  // Let native `cut` behavior occur, then recover control.
 	  setTimeout(function () {
-	    _this.restoreEditorDOM({ x: x, y: y });
-	    _this.removeRenderGuard();
-	    _this.exitCurrentMode();
-	    _this.update(removeFragment(editorState));
+	    editor.restoreEditorDOM({ x: x, y: y });
+	    editor.exitCurrentMode();
+	    editor.update(removeFragment(editorState));
 	  }, 0);
 	}
 
@@ -34171,10 +34449,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Drag behavior has begun from outside the editor element.
 	 */
-
-	function editOnDragOver(e) {
-	  this._internalDrag = false;
-	  this.setMode('drag');
+	function editOnDragOver(editor, e) {
+	  editor._internalDrag = false;
+	  editor.setMode('drag');
 	  e.preventDefault();
 	}
 
@@ -34201,10 +34478,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * A `dragstart` event has begun within the text editor component.
 	 */
-
-	function editOnDragStart() {
-	  this._internalDrag = true;
-	  this.setMode('drag');
+	function editOnDragStart(editor) {
+	  editor._internalDrag = true;
+	  editor.setMode('drag');
 	}
 
 	module.exports = editOnDragStart;
@@ -34227,17 +34503,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
-	function editOnFocus(e) {
-	  var editorState = this.props.editorState;
+	function editOnFocus(editor, e) {
+	  var editorState = editor._latestEditorState;
 	  var currentSelection = editorState.getSelection();
 	  if (currentSelection.getHasFocus()) {
 	    return;
 	  }
 
 	  var selection = currentSelection.set('hasFocus', true);
-	  this.props.onFocus && this.props.onFocus(e);
+	  editor.props.onFocus && editor.props.onFocus(e);
 
 	  // When the tab containing this text editor is hidden and the user does a
 	  // find-in-page in a _different_ tab, Chrome on Mac likes to forget what the
@@ -34245,7 +34521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // moves the cursor back to the beginning of the editor, so we force the
 	  // selection here instead of simply accepting it in order to preserve the
 	  // old cursor position. See https://crbug.com/540004.
-	  this.update(EditorState.forceSelection(editorState, selection));
+	  editor.update(EditorState.forceSelection(editorState, selection));
 	}
 
 	module.exports = editOnFocus;
@@ -34268,14 +34544,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var DraftOffsetKey = __webpack_require__(310);
-	var EditorState = __webpack_require__(280);
-	var Entity = __webpack_require__(266);
-	var UserAgent = __webpack_require__(303);
+	var DraftModifier = __webpack_require__(260);
+	var DraftOffsetKey = __webpack_require__(308);
+	var EditorState = __webpack_require__(276);
+	var UserAgent = __webpack_require__(301);
 
-	var findAncestorOffsetKey = __webpack_require__(323);
-	var nullthrows = __webpack_require__(289);
+	var findAncestorOffsetKey = __webpack_require__(321);
+	var nullthrows = __webpack_require__(287);
 
 	var isGecko = UserAgent.isEngine('Gecko');
 
@@ -34293,7 +34568,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * when an `input` change leads to a DOM/model mismatch, the change should be
 	 * due to a spellcheck change, and we can incorporate it into our model.
 	 */
-	function editOnInput() {
+	function editOnInput(editor) {
+	  if (editor._pendingStateFromBeforeInput !== undefined) {
+	    editor.update(editor._pendingStateFromBeforeInput);
+	    editor._pendingStateFromBeforeInput = undefined;
+	  }
+
 	  var domSelection = global.getSelection();
 
 	  var anchorNode = domSelection.anchorNode;
@@ -34304,8 +34584,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  var domText = anchorNode.textContent;
-	  var editorState = this.props.editorState;
-
+	  var editorState = editor._latestEditorState;
 	  var offsetKey = nullthrows(findAncestorOffsetKey(anchorNode));
 
 	  var _DraftOffsetKey$decod = DraftOffsetKey.decode(offsetKey);
@@ -34347,7 +34626,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 
 	  var entityKey = block.getEntityAt(start);
-	  var entity = entityKey && Entity.get(entityKey);
+	  var entity = entityKey && content.getEntity(entityKey);
 	  var entityType = entity && entity.getMutability();
 	  var preserveEntity = entityType === 'MUTABLE';
 
@@ -34392,7 +34671,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    selectionAfter: selection.merge({ anchorOffset: anchorOffset, focusOffset: focusOffset })
 	  });
 
-	  this.update(EditorState.push(editorState, contentWithAdjustedDOMSelection, changeType));
+	  editor.update(EditorState.push(editorState, contentWithAdjustedDOMSelection, changeType));
 	}
 
 	module.exports = editOnInput;
@@ -34416,12 +34695,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
 	var KeyBindingUtil = __webpack_require__(340);
-	var Keys = __webpack_require__(296);
+	var Keys = __webpack_require__(294);
 	var SecondaryClipboard = __webpack_require__(341);
-	var UserAgent = __webpack_require__(303);
+	var UserAgent = __webpack_require__(301);
 
 	var keyCommandBackspaceToStartOfLine = __webpack_require__(342);
 	var keyCommandBackspaceWord = __webpack_require__(349);
@@ -34434,7 +34713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var keyCommandTransposeCharacters = __webpack_require__(359);
 	var keyCommandUndo = __webpack_require__(360);
 
-	var isEventHandled = __webpack_require__(327);
+	var isEventHandled = __webpack_require__(325);
 
 	var isOptionKeyCommand = KeyBindingUtil.isOptionKeyCommand;
 
@@ -34483,44 +34762,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * See `getDefaultKeyBinding` for defaults. Alternatively, the top-level
 	 * component may provide a custom mapping via the `keyBindingFn` prop.
 	 */
-	function editOnKeyDown(e) {
+	function editOnKeyDown(editor, e) {
 	  var keyCode = e.which;
-	  var editorState = this.props.editorState;
+	  var editorState = editor._latestEditorState;
 
 	  switch (keyCode) {
 	    case Keys.RETURN:
 	      e.preventDefault();
 	      // The top-level component may manually handle newline insertion. If
 	      // no special handling is performed, fall through to command handling.
-	      if (this.props.handleReturn && isEventHandled(this.props.handleReturn(e))) {
+	      if (editor.props.handleReturn && isEventHandled(editor.props.handleReturn(e))) {
 	        return;
 	      }
 	      break;
 	    case Keys.ESC:
 	      e.preventDefault();
-	      this.props.onEscape && this.props.onEscape(e);
+	      editor.props.onEscape && editor.props.onEscape(e);
 	      return;
 	    case Keys.TAB:
-	      this.props.onTab && this.props.onTab(e);
+	      editor.props.onTab && editor.props.onTab(e);
 	      return;
 	    case Keys.UP:
-	      this.props.onUpArrow && this.props.onUpArrow(e);
+	      editor.props.onUpArrow && editor.props.onUpArrow(e);
 	      return;
 	    case Keys.DOWN:
-	      this.props.onDownArrow && this.props.onDownArrow(e);
+	      editor.props.onDownArrow && editor.props.onDownArrow(e);
 	      return;
 	    case Keys.SPACE:
 	      // Handling for OSX where option + space scrolls.
 	      if (isChrome && isOptionKeyCommand(e)) {
 	        e.preventDefault();
 	        // Insert a nbsp into the editor.
-	        var contentState = DraftModifier.replaceText(editorState.getCurrentContent(), editorState.getSelection(), ' ');
-	        this.update(EditorState.push(editorState, contentState, 'insert-characters'));
+	        var contentState = DraftModifier.replaceText(editorState.getCurrentContent(), editorState.getSelection(), '\xA0');
+	        editor.update(EditorState.push(editorState, contentState, 'insert-characters'));
 	        return;
 	      }
 	  }
 
-	  var command = this.props.keyBindingFn(e);
+	  var command = editor.props.keyBindingFn(e);
 
 	  // If no command is specified, allow keydown event to continue.
 	  if (!command) {
@@ -34530,7 +34809,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (command === 'undo') {
 	    // Since undo requires some special updating behavior to keep the editor
 	    // in sync, handle it separately.
-	    keyCommandUndo(e, editorState, this.update);
+	    keyCommandUndo(e, editorState, editor.update);
 	    return;
 	  }
 
@@ -34539,13 +34818,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  e.preventDefault();
 
 	  // Allow components higher up the tree to handle the command first.
-	  if (this.props.handleKeyCommand && isEventHandled(this.props.handleKeyCommand(command))) {
+	  if (editor.props.handleKeyCommand && isEventHandled(editor.props.handleKeyCommand(command))) {
 	    return;
 	  }
 
 	  var newState = onKeyCommand(command, editorState);
 	  if (newState !== editorState) {
-	    this.update(newState);
+	    editor.update(newState);
 	  }
 	}
 
@@ -34570,7 +34849,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(303);
+	var UserAgent = __webpack_require__(301);
 
 	var isOSX = UserAgent.isPlatform('Mac OS X');
 
@@ -34613,11 +34892,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
 
-	var getContentStateFragment = __webpack_require__(271);
-	var nullthrows = __webpack_require__(289);
+	var getContentStateFragment = __webpack_require__(267);
+	var nullthrows = __webpack_require__(287);
 
 	var clipboard = null;
 
@@ -34687,7 +34966,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	var expandRangeToStartOfLine = __webpack_require__(343);
 	var getDraftEditorSelectionWithNodes = __webpack_require__(346);
@@ -35150,7 +35429,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(303);
+	var UserAgent = __webpack_require__(301);
 
 	var invariant = __webpack_require__(29);
 
@@ -35218,11 +35497,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var findAncestorOffsetKey = __webpack_require__(323);
-	var getSelectionOffsetKeyForNode = __webpack_require__(324);
-	var getUpdatedSelectionState = __webpack_require__(326);
+	var findAncestorOffsetKey = __webpack_require__(321);
+	var getSelectionOffsetKeyForNode = __webpack_require__(322);
+	var getUpdatedSelectionState = __webpack_require__(324);
 	var invariant = __webpack_require__(29);
-	var nullthrows = __webpack_require__(289);
+	var nullthrows = __webpack_require__(287);
 
 	/**
 	 * Convert the current selection range to an anchor/focus pair of offset keys
@@ -35458,7 +35737,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
+	var DraftModifier = __webpack_require__(260);
 
 	/**
 	 * For a collapsed selection state, remove text based on the specified strategy.
@@ -35506,7 +35785,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var DraftRemovableWord = __webpack_require__(350);
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	var moveSelectionBackward = __webpack_require__(347);
 	var removeTextWithStrategy = __webpack_require__(348);
@@ -35566,7 +35845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// surrounded on both sides by word characters, they behave as word chars; when
 	// either neighbor is punctuation or an end of the string, they behave as
 	// punctuation.
-	var CHAMELEON_CHARS = '[\'‘’]';
+	var CHAMELEON_CHARS = '[\'\u2018\u2019]';
 
 	// Remove the underscore, which should count as part of the removable word. The
 	// "chameleon chars" also count as punctuation in this regex.
@@ -35656,7 +35935,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var DraftRemovableWord = __webpack_require__(350);
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	var moveSelectionForward = __webpack_require__(353);
 	var removeTextWithStrategy = __webpack_require__(348);
@@ -35754,8 +36033,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
 
 	function keyCommandInsertNewline(editorState) {
 	  var contentState = DraftModifier.splitBlock(editorState.getCurrentContent(), editorState.getSelection());
@@ -35782,7 +36061,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 	var UnicodeUtils = __webpack_require__(344);
 
 	var moveSelectionBackward = __webpack_require__(347);
@@ -35831,7 +36110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 	var UnicodeUtils = __webpack_require__(344);
 
 	var moveSelectionForward = __webpack_require__(353);
@@ -35881,7 +36160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	/**
 	 * See comment for `moveSelectionToStartOfBlock`.
@@ -35923,7 +36202,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	/**
 	 * Collapse selection at the start of the first selected block. This is used
@@ -35965,10 +36244,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
 
-	var getContentStateFragment = __webpack_require__(271);
+	var getContentStateFragment = __webpack_require__(267);
 
 	/**
 	 * Transpose the characters on either side of a collapsed cursor, or
@@ -36048,7 +36327,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
 	function keyCommandUndo(e, editorState, updateFn) {
 	  var undoneState = EditorState.undo(editorState);
@@ -36102,24 +36381,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var BlockMapBuilder = __webpack_require__(256);
-	var CharacterMetadata = __webpack_require__(258);
-	var DataTransfer = __webpack_require__(321);
-	var DraftModifier = __webpack_require__(261);
+	var CharacterMetadata = __webpack_require__(257);
+	var DataTransfer = __webpack_require__(319);
+	var DraftModifier = __webpack_require__(260);
 	var DraftPasteProcessor = __webpack_require__(362);
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 
-	var getEntityKeyForSelection = __webpack_require__(297);
-	var getTextContentFromFiles = __webpack_require__(325);
+	var getEntityKeyForSelection = __webpack_require__(295);
+	var getTextContentFromFiles = __webpack_require__(323);
+	var isEventHandled = __webpack_require__(325);
 	var splitTextIntoTextBlocks = __webpack_require__(366);
-
-	var isEventHandled = __webpack_require__(327);
 
 	/**
 	 * Paste content.
 	 */
-	function editOnPaste(e) {
-	  var _this = this;
-
+	function editOnPaste(editor, e) {
 	  e.preventDefault();
 	  var data = new DataTransfer(e.clipboardData);
 
@@ -36130,7 +36406,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (files.length > 0) {
 	      // Allow customized paste handling for images, etc. Otherwise, fall
 	      // through to insert text contents into the editor.
-	      if (this.props.handlePastedFiles && isEventHandled(this.props.handlePastedFiles(files))) {
+	      if (editor.props.handlePastedFiles && isEventHandled(editor.props.handlePastedFiles(files))) {
 	        return;
 	      }
 
@@ -36140,8 +36416,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          return;
 	        }
 
-	        var editorState = _this.props.editorState;
-
+	        var editorState = editor._latestEditorState;
 	        var blocks = splitTextIntoTextBlocks(fileText);
 	        var character = CharacterMetadata.create({
 	          style: editorState.getCurrentInlineStyle(),
@@ -36153,7 +36428,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        var withInsertedText = DraftModifier.replaceWithFragment(editorState.getCurrentContent(), editorState.getSelection(), fragment);
 
-	        _this.update(EditorState.push(editorState, withInsertedText, 'insert-fragment'));
+	        editor.update(EditorState.push(editorState, withInsertedText, 'insert-fragment'));
 	      });
 
 	      return;
@@ -36164,7 +36439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var text = data.getText();
 	  var html = data.getHTML();
 
-	  if (this.props.handlePastedText && isEventHandled(this.props.handlePastedText(text, html))) {
+	  if (editor.props.handlePastedText && isEventHandled(editor.props.handlePastedText(text, html))) {
 	    return;
 	  }
 
@@ -36172,7 +36447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    textBlocks = splitTextIntoTextBlocks(text);
 	  }
 
-	  if (!this.props.stripPastedStyles) {
+	  if (!editor.props.stripPastedStyles) {
 	    // If the text from the paste event is rich content that matches what we
 	    // already have on the internal clipboard, assume that we should just use
 	    // the clipboard fragment for the paste. This will allow us to preserve
@@ -36180,45 +36455,49 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // stripped during comparison -- this is because copy/paste within the
 	    // editor in Firefox and IE will not include empty lines. The resulting
 	    // paste will preserve the newlines correctly.
-	    var internalClipboard = this.getClipboard();
+	    var internalClipboard = editor.getClipboard();
 	    if (data.isRichText() && internalClipboard) {
 	      if (
 	      // If the editorKey is present in the pasted HTML, it should be safe to
 	      // assume this is an internal paste.
-	      html.indexOf(this.getEditorKey()) !== -1 ||
+	      html.indexOf(editor.getEditorKey()) !== -1 ||
 	      // The copy may have been made within a single block, in which case the
 	      // editor key won't be part of the paste. In this case, just check
 	      // whether the pasted text matches the internal clipboard.
 	      textBlocks.length === 1 && internalClipboard.size === 1 && internalClipboard.first().getText() === text) {
-	        this.update(insertFragment(this.props.editorState, internalClipboard));
+	        editor.update(insertFragment(editor._latestEditorState, internalClipboard));
 	        return;
 	      }
 	    } else if (internalClipboard && data.types.includes('com.apple.webarchive') && !data.types.includes('text/html') && areTextBlocksAndClipboardEqual(textBlocks, internalClipboard)) {
 	      // Safari does not properly store text/html in some cases.
 	      // Use the internalClipboard if present and equal to what is on
 	      // the clipboard. See https://bugs.webkit.org/show_bug.cgi?id=19893.
-	      this.update(insertFragment(this.props.editorState, internalClipboard));
+	      editor.update(insertFragment(editor._latestEditorState, internalClipboard));
 	      return;
 	    }
 
 	    // If there is html paste data, try to parse that.
 	    if (html) {
-	      var htmlFragment = DraftPasteProcessor.processHTML(html, this.props.blockRenderMap);
+	      var htmlFragment = DraftPasteProcessor.processHTML(html, editor.props.blockRenderMap);
 	      if (htmlFragment) {
-	        var htmlMap = BlockMapBuilder.createFromArray(htmlFragment);
-	        this.update(insertFragment(this.props.editorState, htmlMap));
-	        return;
+	        var contentBlocks = htmlFragment.contentBlocks;
+	        var entityMap = htmlFragment.entityMap;
+
+	        if (contentBlocks) {
+	          var htmlMap = BlockMapBuilder.createFromArray(contentBlocks);
+	          editor.update(insertFragment(editor._latestEditorState, htmlMap, entityMap));
+	          return;
+	        }
 	      }
 	    }
 
 	    // Otherwise, create a new fragment from our pasted text. Also
 	    // empty the internal clipboard, since it's no longer valid.
-	    this.setClipboard(null);
+	    editor.setClipboard(null);
 	  }
 
-	  if (textBlocks) {
-	    var editorState = this.props.editorState;
-
+	  if (textBlocks.length) {
+	    var editorState = editor._latestEditorState;
 	    var character = CharacterMetadata.create({
 	      style: editorState.getCurrentInlineStyle(),
 	      entity: getEntityKeyForSelection(editorState.getCurrentContent(), editorState.getSelection())
@@ -36227,13 +36506,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var textFragment = DraftPasteProcessor.processText(textBlocks, character);
 
 	    var textMap = BlockMapBuilder.createFromArray(textFragment);
-	    this.update(insertFragment(this.props.editorState, textMap));
+	    editor.update(insertFragment(editor._latestEditorState, textMap));
 	  }
 	}
 
-	function insertFragment(editorState, fragment) {
+	function insertFragment(editorState, fragment, entityMap) {
 	  var newContent = DraftModifier.replaceWithFragment(editorState.getCurrentContent(), editorState.getSelection(), fragment);
-	  return EditorState.push(editorState, newContent, 'insert-fragment');
+	  // TODO: merge the entity map once we stop using DraftEntity
+	  // like this:
+	  // const mergedEntityMap = newContent.getEntityMap().merge(entityMap);
+
+	  return EditorState.push(editorState, newContent.set('entityMap', entityMap), 'insert-fragment');
 	}
 
 	function areTextBlocksAndClipboardEqual(textBlocks, blockMap) {
@@ -36263,14 +36546,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
-	var ContentBlock = __webpack_require__(259);
-	var Immutable = __webpack_require__(257);
+	var CharacterMetadata = __webpack_require__(257);
+	var ContentBlock = __webpack_require__(258);
+	var Immutable = __webpack_require__(185);
 
 	var convertFromHTMLtoContentBlocks = __webpack_require__(363);
-	var generateRandomKey = __webpack_require__(272);
+	var generateRandomKey = __webpack_require__(268);
 	var getSafeBodyFromHTML = __webpack_require__(365);
-	var sanitizeDraftText = __webpack_require__(284);
+	var sanitizeDraftText = __webpack_require__(282);
 
 	var List = Immutable.List;
 	var Repeat = Immutable.Repeat;
@@ -36314,19 +36597,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
-	var ContentBlock = __webpack_require__(259);
-	var DefaultDraftBlockRenderMap = __webpack_require__(291);
-	var DraftEntity = __webpack_require__(266);
-	var Immutable = __webpack_require__(257);
+	var CharacterMetadata = __webpack_require__(257);
+	var ContentBlock = __webpack_require__(258);
+	var DefaultDraftBlockRenderMap = __webpack_require__(289);
+	var DraftEntity = __webpack_require__(279);
+	var Immutable = __webpack_require__(185);
 	var URI = __webpack_require__(364);
 
-	var generateRandomKey = __webpack_require__(272);
+	var generateRandomKey = __webpack_require__(268);
 	var getSafeBodyFromHTML = __webpack_require__(365);
 	var invariant = __webpack_require__(29);
-	var nullthrows = __webpack_require__(289);
-	var sanitizeDraftText = __webpack_require__(284);
+	var nullthrows = __webpack_require__(287);
+	var sanitizeDraftText = __webpack_require__(282);
 
+	var _require = __webpack_require__(185);
+
+	var Set = _require.Set;
 	var List = Immutable.List;
 	var OrderedSet = Immutable.OrderedSet;
 
@@ -36363,6 +36649,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	var anchorAttr = ['className', 'href', 'rel', 'target', 'title'];
+
+	var imgAttr = ['alt', 'className', 'height', 'src', 'width'];
 
 	var lastBlock;
 
@@ -36418,9 +36706,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function getBlockMapSupportedTags(blockRenderMap) {
 	  var unstyledElement = blockRenderMap.get('unstyled').element;
-	  return blockRenderMap.map(function (config) {
-	    return config.element;
-	  }).valueSeq().toSet().filter(function (tag) {
+	  var tags = new Set([]);
+
+	  blockRenderMap.forEach(function (draftBlock) {
+	    if (draftBlock.aliasedElements) {
+	      draftBlock.aliasedElements.forEach(function (tag) {
+	        tags = tags.add(tag);
+	      });
+	    }
+
+	    tags = tags.add(draftBlock.element);
+	  });
+
+	  return tags.filter(function (tag) {
 	    return tag && tag !== unstyledElement;
 	  }).toArray().sort();
 	}
@@ -36437,8 +36735,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function getBlockTypeForTag(tag, lastList, blockRenderMap) {
-	  var matchedTypes = blockRenderMap.filter(function (config) {
-	    return config.element === tag || config.wrapper === tag;
+	  var matchedTypes = blockRenderMap.filter(function (draftBlock) {
+	    return draftBlock.element === tag || draftBlock.wrapper === tag || draftBlock.aliasedElements && draftBlock.aliasedElements.some(function (alias) {
+	      return alias === tag;
+	    });
 	  }).keySeq().toSet().toArray().sort();
 
 	  // if we dont have any matched type, return unstyled
@@ -36543,17 +36843,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return protocol === 'http:' || protocol === 'https:' || protocol === 'mailto:';
 	}
 
-	function genFragment(node, inlineStyle, lastList, inBlock, blockTags, depth, blockRenderMap, inEntity) {
+	function genFragment(entityMap, node, inlineStyle, lastList, inBlock, blockTags, depth, blockRenderMap, inEntity) {
 	  var nodeName = node.nodeName.toLowerCase();
 	  var newBlock = false;
 	  var nextBlockType = 'unstyled';
 	  var lastLastBlock = lastBlock;
+	  var newEntityMap = entityMap;
 
 	  // Base Case
 	  if (nodeName === '#text') {
 	    var text = node.textContent;
 	    if (text.trim() === '' && inBlock !== 'pre') {
-	      return getWhitespaceChunk(inEntity);
+	      return { chunk: getWhitespaceChunk(inEntity), entityMap: entityMap };
 	    }
 	    if (inBlock !== 'pre') {
 	      // Can't use empty string because MSWord
@@ -36564,10 +36865,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    lastBlock = nodeName;
 
 	    return {
-	      text: text,
-	      inlines: Array(text.length).fill(inlineStyle),
-	      entities: Array(text.length).fill(inEntity),
-	      blocks: []
+	      chunk: {
+	        text: text,
+	        inlines: Array(text.length).fill(inlineStyle),
+	        entities: Array(text.length).fill(inEntity),
+	        blocks: []
+	      },
+	      entityMap: entityMap
 	    };
 	  }
 
@@ -36577,9 +36881,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // BR tags
 	  if (nodeName === 'br') {
 	    if (lastLastBlock === 'br' && (!inBlock || getBlockTypeForTag(inBlock, lastList, blockRenderMap) === 'unstyled')) {
-	      return getBlockDividerChunk('unstyled', depth);
+	      return { chunk: getBlockDividerChunk('unstyled', depth), entityMap: entityMap };
 	    }
-	    return getSoftNewlineChunk();
+	    return { chunk: getSoftNewlineChunk(), entityMap: entityMap };
+	  }
+
+	  // IMG tags
+	  if (nodeName === 'img' && node instanceof HTMLImageElement && node.attributes.getNamedItem('src') && node.attributes.getNamedItem('src').value) {
+	    (function () {
+	      var image = node;
+	      var entityConfig = {};
+
+	      imgAttr.forEach(function (attr) {
+	        var imageAttribute = image.getAttribute(attr);
+	        if (imageAttribute) {
+	          entityConfig[attr] = imageAttribute;
+	        }
+	      });
+	      var imageURI = new URI(entityConfig.src).toString();
+	      node.textContent = imageURI; // Output src if no decorator
+
+	      // TODO: update this when we remove DraftEntity entirely
+	      inEntity = DraftEntity.__create('IMAGE', 'MUTABLE', entityConfig || {});
+	    })();
 	  }
 
 	  var chunk = getEmptyChunk();
@@ -36630,14 +36954,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 
 	        entityConfig.url = new URI(anchor.href).toString();
-
-	        entityId = DraftEntity.create('LINK', 'MUTABLE', entityConfig);
+	        // TODO: update this when we remove DraftEntity completely
+	        entityId = DraftEntity.__create('LINK', 'MUTABLE', entityConfig || {});
 	      })();
 	    } else {
 	      entityId = undefined;
 	    }
 
-	    newChunk = genFragment(child, inlineStyle, lastList, inBlock, blockTags, depth, blockRenderMap, entityId || inEntity);
+	    var _genFragment = genFragment(newEntityMap, child, inlineStyle, lastList, inBlock, blockTags, depth, blockRenderMap, entityId || inEntity);
+
+	    var generatedChunk = _genFragment.chunk;
+	    var maybeUpdatedEntityMap = _genFragment.entityMap;
+
+
+	    newChunk = generatedChunk;
+	    newEntityMap = maybeUpdatedEntityMap;
 
 	    chunk = joinChunks(chunk, newChunk);
 	    var sibling = child.nextSibling;
@@ -36656,10 +36987,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    chunk = joinChunks(chunk, getBlockDividerChunk(nextBlockType, depth));
 	  }
 
-	  return chunk;
+	  return { chunk: chunk, entityMap: newEntityMap };
 	}
 
-	function getChunkForHTML(html, DOMBuilder, blockRenderMap) {
+	function getChunkForHTML(html, DOMBuilder, blockRenderMap, entityMap) {
 	  html = html.trim().replace(REGEX_CR, '').replace(REGEX_NBSP, SPACE).replace(REGEX_CARRIAGE, '').replace(REGEX_ZWS, '');
 
 	  var supportedBlockTags = getBlockMapSupportedTags(blockRenderMap);
@@ -36677,9 +37008,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Start with -1 block depth to offset the fact that we are passing in a fake
 	  // UL block to start with.
-	  var chunk = genFragment(safeBody, OrderedSet(), 'ul', null, workingBlocks, -1, blockRenderMap);
+
+	  var _genFragment2 = genFragment(entityMap, safeBody, OrderedSet(), 'ul', null, workingBlocks, -1, blockRenderMap);
+
+	  var chunk = _genFragment2.chunk;
+	  var newEntityMap = _genFragment2.entityMap;
 
 	  // join with previous block to prevent weirdness on paste
+
 	  if (chunk.text.indexOf('\r') === 0) {
 	    chunk = {
 	      text: chunk.text.slice(1),
@@ -36709,7 +37045,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    chunk.blocks.unshift({ type: 'unstyled', depth: 0 });
 	  }
 
-	  return chunk;
+	  return { chunk: chunk, entityMap: newEntityMap };
 	}
 
 	function convertFromHTMLtoContentBlocks(html) {
@@ -36720,35 +37056,44 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // arbitrary code in whatever environment you're running this in. For an
 	  // example of how we try to do this in-browser, see getSafeBodyFromHTML.
 
-	  var chunk = getChunkForHTML(html, DOMBuilder, blockRenderMap);
+	  // TODO: replace DraftEntity with an OrderedMap here
+	  var chunkData = getChunkForHTML(html, DOMBuilder, blockRenderMap, DraftEntity);
 
-	  if (chunk == null) {
+	  if (chunkData == null) {
 	    return null;
 	  }
-	  var start = 0;
-	  return chunk.text.split('\r').map(function (textBlock, ii) {
-	    // Make absolutely certain that our text is acceptable.
-	    textBlock = sanitizeDraftText(textBlock);
-	    var end = start + textBlock.length;
-	    var inlines = nullthrows(chunk).inlines.slice(start, end);
-	    var entities = nullthrows(chunk).entities.slice(start, end);
-	    var characterList = List(inlines.map(function (style, ii) {
-	      var data = { style: style, entity: null };
-	      if (entities[ii]) {
-	        data.entity = entities[ii];
-	      }
-	      return CharacterMetadata.create(data);
-	    }));
-	    start = end + 1;
 
-	    return new ContentBlock({
-	      key: generateRandomKey(),
-	      type: nullthrows(chunk).blocks[ii].type,
-	      depth: nullthrows(chunk).blocks[ii].depth,
-	      text: textBlock,
-	      characterList: characterList
-	    });
-	  });
+	  var chunk = chunkData.chunk;
+	  var newEntityMap = chunkData.entityMap;
+
+
+	  var start = 0;
+	  return {
+	    contentBlocks: chunk.text.split('\r').map(function (textBlock, ii) {
+	      // Make absolutely certain that our text is acceptable.
+	      textBlock = sanitizeDraftText(textBlock);
+	      var end = start + textBlock.length;
+	      var inlines = nullthrows(chunk).inlines.slice(start, end);
+	      var entities = nullthrows(chunk).entities.slice(start, end);
+	      var characterList = List(inlines.map(function (style, ii) {
+	        var data = { style: style, entity: null };
+	        if (entities[ii]) {
+	          data.entity = entities[ii];
+	        }
+	        return CharacterMetadata.create(data);
+	      }));
+	      start = end + 1;
+
+	      return new ContentBlock({
+	        key: generateRandomKey(),
+	        type: nullthrows(chunk).blocks[ii].type,
+	        depth: nullthrows(chunk).blocks[ii].depth,
+	        text: textBlock,
+	        characterList: characterList
+	      });
+	    }),
+	    entityMap: newEntityMap
+	  };
 	}
 
 	module.exports = convertFromHTMLtoContentBlocks;
@@ -36806,7 +37151,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var UserAgent = __webpack_require__(303);
+	var UserAgent = __webpack_require__(301);
 
 	var isOldIE = UserAgent.isBrowser('IE <= 9');
 
@@ -36872,18 +37217,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var EditorState = __webpack_require__(280);
+	var EditorState = __webpack_require__(276);
 	var ReactDOM = __webpack_require__(52);
 
 	var getDraftEditorSelection = __webpack_require__(368);
 
-	function editOnSelect() {
-	  if (this._blockSelectEvents) {
+	function editOnSelect(editor) {
+	  if (editor._blockSelectEvents || editor._latestEditorState !== editor.props.editorState) {
 	    return;
 	  }
 
-	  var editorState = this.props.editorState;
-	  var documentSelection = getDraftEditorSelection(editorState, ReactDOM.findDOMNode(this.refs.editorContainer).firstChild);
+	  var editorState = editor.props.editorState;
+	  var documentSelection = getDraftEditorSelection(editorState, ReactDOM.findDOMNode(editor.refs.editorContainer).firstChild);
 	  var updatedSelectionState = documentSelection.selectionState;
 
 	  if (updatedSelectionState !== editorState.getSelection()) {
@@ -36892,7 +37237,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      editorState = EditorState.acceptSelection(editorState, updatedSelectionState);
 	    }
-	    this.update(editorState);
+	    editor.update(editorState);
 	  }
 	}
 
@@ -36967,7 +37312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var React = __webpack_require__(23);
 
-	var cx = __webpack_require__(292);
+	var cx = __webpack_require__(290);
 
 	/**
 	 * This component is responsible for rendering placeholder text for the
@@ -37034,8 +37379,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	'use strict';
 
 	var KeyBindingUtil = __webpack_require__(340);
-	var Keys = __webpack_require__(296);
-	var UserAgent = __webpack_require__(303);
+	var Keys = __webpack_require__(294);
+	var UserAgent = __webpack_require__(301);
 
 	var isOSX = UserAgent.isPlatform('Mac OS X');
 	var isWindows = UserAgent.isPlatform('Windows');
@@ -37162,20 +37507,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftEntity = __webpack_require__(266);
-	var DraftModifier = __webpack_require__(261);
-	var EditorState = __webpack_require__(280);
-	var SelectionState = __webpack_require__(283);
+	var DraftModifier = __webpack_require__(260);
+	var EditorState = __webpack_require__(276);
+	var SelectionState = __webpack_require__(281);
 
 	var adjustBlockDepthForContentState = __webpack_require__(372);
-	var nullthrows = __webpack_require__(289);
+	var nullthrows = __webpack_require__(287);
 
 	var RichTextEditorUtil = {
 	  currentBlockContainsLink: function currentBlockContainsLink(editorState) {
 	    var selection = editorState.getSelection();
-	    return editorState.getCurrentContent().getBlockForKey(selection.getAnchorKey()).getCharacterList().slice(selection.getStartOffset(), selection.getEndOffset()).some(function (v) {
+	    var contentState = editorState.getCurrentContent();
+	    var entityMap = contentState.getEntityMap();
+	    return contentState.getBlockForKey(selection.getAnchorKey()).getCharacterList().slice(selection.getStartOffset(), selection.getEndOffset()).some(function (v) {
 	      var entity = v.getEntity();
-	      return !!entity && DraftEntity.get(entity).getType() === 'LINK';
+	      return !!entity && entityMap.__get(entity).getType() === 'LINK';
 	    });
 	  },
 
@@ -37207,6 +37553,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'delete-to-end-of-block':
 	        return RichTextEditorUtil.onDelete(editorState);
 	      default:
+	        // they may have custom editor commands; ignore those
 	        return null;
 	    }
 	  },
@@ -37235,12 +37582,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var blockBefore = content.getBlockBefore(startKey);
 
 	    if (blockBefore && blockBefore.getType() === 'atomic') {
-	      var atomicBlockTarget = selection.merge({
-	        anchorKey: blockBefore.getKey(),
-	        anchorOffset: 0
-	      });
-	      var asCurrentStyle = DraftModifier.setBlockType(content, atomicBlockTarget, content.getBlockForKey(startKey).getType());
-	      var withoutAtomicBlock = DraftModifier.removeRange(asCurrentStyle, atomicBlockTarget, 'backward');
+	      var blockMap = content.getBlockMap()['delete'](blockBefore.getKey());
+	      var withoutAtomicBlock = content.merge({ blockMap: blockMap, selectionAfter: selection });
 	      if (withoutAtomicBlock !== content) {
 	        return EditorState.push(editorState, withoutAtomicBlock, 'remove-range');
 	      }
@@ -37517,7 +37860,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var DraftEntity = __webpack_require__(266);
 	var DraftStringKey = __webpack_require__(374);
 
 	var encodeEntityRanges = __webpack_require__(375);
@@ -37555,7 +37897,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var entityKeys = Object.keys(entityStorageMap);
 	  var flippedStorageMap = {};
 	  entityKeys.forEach(function (key, jj) {
-	    var entity = DraftEntity.get(DraftStringKey.unstringify(key));
+	    var entity = contentState.getEntity(DraftStringKey.unstringify(key));
 	    flippedStorageMap[jj] = {
 	      type: entity.getType(),
 	      mutability: entity.getMutability(),
@@ -37669,7 +38011,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var UnicodeUtils = __webpack_require__(344);
 
-	var findRangesImmutable = __webpack_require__(260);
+	var findRangesImmutable = __webpack_require__(259);
 
 	var areEqual = function areEqual(a, b) {
 	  return a === b;
@@ -37740,19 +38082,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _assign = __webpack_require__(267);
+	var _assign = __webpack_require__(25);
 
 	var _extends = _assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var ContentBlock = __webpack_require__(259);
-	var ContentState = __webpack_require__(282);
-	var DraftEntity = __webpack_require__(266);
-	var Immutable = __webpack_require__(257);
+	var ContentBlock = __webpack_require__(258);
+	var ContentState = __webpack_require__(278);
+	var DraftEntity = __webpack_require__(279);
 
 	var createCharacterList = __webpack_require__(378);
 	var decodeEntityRanges = __webpack_require__(379);
 	var decodeInlineStyleRanges = __webpack_require__(380);
-	var generateRandomKey = __webpack_require__(272);
+	var generateRandomKey = __webpack_require__(268);
+	var Immutable = __webpack_require__(185);
 
 	var Map = Immutable.Map;
 
@@ -37763,13 +38105,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	  var fromStorageToLocal = {};
+
+	  // TODO: Update this once we completely remove DraftEntity
 	  Object.keys(entityMap).forEach(function (storageKey) {
 	    var encodedEntity = entityMap[storageKey];
 	    var type = encodedEntity.type;
 	    var mutability = encodedEntity.mutability;
 	    var data = encodedEntity.data;
 
-	    var newKey = DraftEntity.create(type, mutability, data || {});
+	    var newKey = DraftEntity.__create(type, mutability, data || {});
 	    fromStorageToLocal[storageKey] = newKey;
 	  });
 
@@ -37827,8 +38171,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var CharacterMetadata = __webpack_require__(258);
-	var Immutable = __webpack_require__(257);
+	var CharacterMetadata = __webpack_require__(257);
+	var Immutable = __webpack_require__(185);
 
 	var List = Immutable.List;
 
@@ -37909,7 +38253,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var UnicodeUtils = __webpack_require__(344);
 
-	var _require = __webpack_require__(257);
+	var _require = __webpack_require__(185);
 
 	var OrderedSet = _require.OrderedSet;
 	var substr = UnicodeUtils.substr;
@@ -38085,21 +38429,22 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 410 */,
 /* 411 */,
 /* 412 */,
-/* 413 */
+/* 413 */,
+/* 414 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(414);
+	module.exports = __webpack_require__(415);
 
 /***/ },
-/* 414 */
+/* 415 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
-	var bind = __webpack_require__(416);
-	var Axios = __webpack_require__(417);
-	var defaults = __webpack_require__(418);
+	var utils = __webpack_require__(416);
+	var bind = __webpack_require__(417);
+	var Axios = __webpack_require__(418);
+	var defaults = __webpack_require__(419);
 
 	/**
 	 * Create an instance of Axios
@@ -38132,15 +38477,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(435);
-	axios.CancelToken = __webpack_require__(436);
-	axios.isCancel = __webpack_require__(432);
+	axios.Cancel = __webpack_require__(436);
+	axios.CancelToken = __webpack_require__(437);
+	axios.isCancel = __webpack_require__(433);
 
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(437);
+	axios.spread = __webpack_require__(438);
 
 	module.exports = axios;
 
@@ -38149,12 +38494,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 415 */
+/* 416 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var bind = __webpack_require__(416);
+	var bind = __webpack_require__(417);
 
 	/*global toString:true*/
 
@@ -38454,7 +38799,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 416 */
+/* 417 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38471,17 +38816,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 417 */
+/* 418 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(418);
-	var utils = __webpack_require__(415);
-	var InterceptorManager = __webpack_require__(429);
-	var dispatchRequest = __webpack_require__(430);
-	var isAbsoluteURL = __webpack_require__(433);
-	var combineURLs = __webpack_require__(434);
+	var defaults = __webpack_require__(419);
+	var utils = __webpack_require__(416);
+	var InterceptorManager = __webpack_require__(430);
+	var dispatchRequest = __webpack_require__(431);
+	var isAbsoluteURL = __webpack_require__(434);
+	var combineURLs = __webpack_require__(435);
 
 	/**
 	 * Create a new instance of Axios
@@ -38562,13 +38907,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 418 */
+/* 419 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	var utils = __webpack_require__(415);
-	var normalizeHeaderName = __webpack_require__(419);
+	var utils = __webpack_require__(416);
+	var normalizeHeaderName = __webpack_require__(420);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -38585,10 +38930,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(420);
+	    adapter = __webpack_require__(421);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(420);
+	    adapter = __webpack_require__(421);
 	  }
 	  return adapter;
 	}
@@ -38662,12 +39007,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(133)))
 
 /***/ },
-/* 419 */
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -38680,18 +39025,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 420 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
-	var settle = __webpack_require__(421);
-	var buildURL = __webpack_require__(424);
-	var parseHeaders = __webpack_require__(425);
-	var isURLSameOrigin = __webpack_require__(426);
-	var createError = __webpack_require__(422);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(427);
+	var utils = __webpack_require__(416);
+	var settle = __webpack_require__(422);
+	var buildURL = __webpack_require__(425);
+	var parseHeaders = __webpack_require__(426);
+	var isURLSameOrigin = __webpack_require__(427);
+	var createError = __webpack_require__(423);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(428);
 
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -38787,7 +39132,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(428);
+	      var cookies = __webpack_require__(429);
 
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -38863,12 +39208,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 421 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var createError = __webpack_require__(422);
+	var createError = __webpack_require__(423);
 
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -38894,12 +39239,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 422 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var enhanceError = __webpack_require__(423);
+	var enhanceError = __webpack_require__(424);
 
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -38917,7 +39262,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 423 */
+/* 424 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -38942,12 +39287,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 424 */
+/* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -39016,12 +39361,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 425 */
+/* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	/**
 	 * Parse headers into an object
@@ -39059,12 +39404,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 426 */
+/* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -39133,7 +39478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 427 */
+/* 428 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39175,12 +39520,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 428 */
+/* 429 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -39234,12 +39579,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 429 */
+/* 430 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -39292,15 +39637,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 430 */
+/* 431 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
-	var transformData = __webpack_require__(431);
-	var isCancel = __webpack_require__(432);
-	var defaults = __webpack_require__(418);
+	var utils = __webpack_require__(416);
+	var transformData = __webpack_require__(432);
+	var isCancel = __webpack_require__(433);
+	var defaults = __webpack_require__(419);
 
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -39377,12 +39722,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 431 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(415);
+	var utils = __webpack_require__(416);
 
 	/**
 	 * Transform the data for a request or a response
@@ -39403,7 +39748,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 432 */
+/* 433 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39414,7 +39759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 433 */
+/* 434 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39434,7 +39779,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 434 */
+/* 435 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39452,7 +39797,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 435 */
+/* 436 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -39477,12 +39822,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 436 */
+/* 437 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Cancel = __webpack_require__(435);
+	var Cancel = __webpack_require__(436);
 
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -39540,7 +39885,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 437 */
+/* 438 */
 /***/ function(module, exports) {
 
 	'use strict';
