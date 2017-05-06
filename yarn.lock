@@ -1571,11 +1571,11 @@ draft-convert@^1.2.3:
     immutable "^3.8.1"
     invariant "^2.2.1"
 
-draft-js@0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.9.1.tgz#940a51a0ad1fede0411676b6404f4050495f54f9"
+"draft-js@https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c":
+  version "0.10.0"
+  resolved "https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c"
   dependencies:
-    fbjs "^0.8.3"
+    fbjs "^0.8.7"
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
@@ -1896,7 +1896,7 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.3, fbjs@^0.8.4:
+fbjs@^0.8.4, fbjs@^0.8.7:
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.8.tgz#02f1b6e0ea0d46c24e0b51a2d24df069563a5ad6"
   dependencies:

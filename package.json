@@ -24,7 +24,7 @@
     "babel-runtime": "^6.11.6",
     "cross-env": "^3.1.4",
     "draft-convert": "^1.2.3",
-    "draft-js": "0.9.1",
+    "draft-js": "https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c",
     "react": "~15.3.0",
     "react-dom": "~15.3.0"
   },
@@ -33,7 +33,7 @@
     "babel-runtime": "^6.11.6",
     "cross-env": "^3.1.4",
     "draft-convert": "^1.2.3",
-    "draft-js": "0.9.1",
+    "draft-js": "https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c",
     "react": "~15.3.0",
     "react-dom": "~15.3.0"
   },
