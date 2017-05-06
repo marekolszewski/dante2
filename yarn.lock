@@ -1571,9 +1571,9 @@ draft-convert@^1.2.3:
     immutable "^3.8.1"
     invariant "^2.2.1"
 
-"draft-js@https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c":
+"draft-js@https://github.com/marekolszewski/draft-js.git#16ac16c":
   version "0.10.0"
-  resolved "https://github.com/marekolszewski/draft-js.git#0a11674602373723dd9de45c0e371a3a14cd212c"
+  resolved "https://github.com/marekolszewski/draft-js.git#16ac16c"
   dependencies:
     fbjs "^0.8.7"
     immutable "~3.7.4"

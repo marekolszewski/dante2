@@ -41064,7 +41064,9 @@
 	        selectionState: JSON.stringify(selectionState.toJS())
 	      });
 	    }
-	    selection.extend(node, offset);
+	    if (selection.type !== 'None') {
+	      selection.extend(node, offset);
+	    }
 	  } else {
 	    // IE doesn't support extend. This will mean no backward selection.
 	    // Extract the existing selection range and add focus to it.
